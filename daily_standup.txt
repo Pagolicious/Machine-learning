@@ -40,3 +40,15 @@ Oscar & Charlie: Both have working programs for resizing
 Until next time:
 Continue working with GUI
 Continue improving resize program that will be ready to implement with the GUI
+
+Daily stand-up 2022-04-22 11:29
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: Merged GUI prototype
+Alexander: Working on the model for SRGAN
+Oscar: Made a tool to resize pictures
+Charlie: Made a tool to crop pictures for 96x96
+
+Until next time:
+Oscar & Charlie: will compare their tools and create a tool based on that
+Lenny: Read about the model
+Alexander: Continue work on model
