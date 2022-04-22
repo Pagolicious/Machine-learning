@@ -10,7 +10,7 @@ Charlie: Checked resizing for picture
 - Work on GUI implementations
 - Look at downscaling
 
-Daily stand-up 2022-04-12
+Daily stand-up 2022-04-13
 Present during meeting: Alexander, Lenny, Oscar and Charlie
 
 Group decided to use SRGAN model for the images.
@@ -21,3 +21,22 @@ Group decided to use Tkinter as Gui for now.
 Until next time:
 try to implement gui with downscale picture tool.
 try experiment with model.
+
+Sprint planning 2022-04-20 14:00
+Present during meeting: Alexander, Lenny, Oscar, Charlie and Britta
+
+Lenny: Work more on a prototype Gui
+Alexander: SRGAN model, read more about it and starting to test it
+Oscar: Research what works best to resize pictures to scale
+Britta: Research SRGAN model and look at what we already know about it
+Charlie: Research what works best to resize pictures to scale
+
+Daily stand-up 2022-04-21 09:00
+Present during meeting: Lenny, Oscar and Charlie
+Britta left the group so we are now 4 people in the group
+Lenny: Showed a prototype GUI that looks great
+Oscar & Charlie: Both have working programs for resizing
+
+Until next time:
+Continue working with GUI
+Continue improving resize program that will be ready to implement with the GUI
