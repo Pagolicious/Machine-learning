@@ -52,3 +52,13 @@ Until next time:
 Oscar & Charlie: will compare their tools and create a tool based on that
 Lenny: Read about the model
 Alexander: Continue work on model
+
+Daily stand-up 2022-04-25 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Charlie och Oscar continues with implementing the tools and learning tkinter more.
+Alexander, keeps working with the model, should soon be ready.
+Lenny make som improvment of the Gui to darkmode.
+
+Until next time:
+Planning the sprint, make a loss function.
+train the model if there is time.
