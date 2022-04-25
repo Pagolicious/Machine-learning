@@ -6,6 +6,7 @@ from tkinter.constants import *
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
 from PIL import ImageTk, Image
+from resize import resize_decrease
 
 """
 *******************************************************************************************
@@ -26,6 +27,9 @@ class SuperResolutionGuiClass:
         # Add the functions here before the gui part starts.
         def convert_to_96x96_and_24x24():
             print("Ok im the function there all the converting should take place :)")
+            in_folder = self.textbox1.get().replace('\\', '/')
+            out_folder = self.textbox3.get().replace('\\', '/')
+            resize_decrease(in_folder, out_folder)
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
         def create_super_resolution_photo():
