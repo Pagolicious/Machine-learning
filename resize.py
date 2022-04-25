@@ -16,10 +16,12 @@ def resize_decrease():
             if width > height:
                 new_width = 96
                 new_height = new_width * height / width
+                new_width_small = 24
+                new_height_small = new_width_small * height / width
 
                 image_file_lower = image_file.resize((new_width, int(new_height)))
                 image_file_lower.save(f'C:/Users/Oscar/Desktop/PyCharm/super_resolution/images/resized/original/original-96x96-{images}')
-                image_file_lowest = image_file.resize((24, 24))
+                image_file_lowest = image_file.resize((new_width_small, int(new_height_small)))
                 image_file_lowest.save(f'C:/Users/Oscar/Desktop/PyCharm/super_resolution/images/resized/original/original-24x24-{images}')
 
                 #image_file.save(f'C:/Users/Oscar/Desktop/PyCharm/super_resolution/images/resized/decreased/{name}-800-600-25%.jpg', quality=25)
@@ -28,10 +30,12 @@ def resize_decrease():
             else:
                 new_height = 96
                 new_width = new_height * width / height
+                new_height_small = 24
+                new_width_small = new_height_small * width / height
 
                 image_file_lower = image_file.resize((int(new_width), new_height))
                 image_file_lower.save(f'C:/Users/Oscar/Desktop/PyCharm/super_resolution/images/resized/original/original-96x96-{images}')
-                image_file_lowest = image_file.resize((24, 24))
+                image_file_lowest = image_file.resize((int(new_width_small), new_height_small))
                 image_file_lowest.save(f'C:/Users/Oscar/Desktop/PyCharm/super_resolution/images/resized/original/original-24x24-{images}')
 
 
