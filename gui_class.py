@@ -26,14 +26,10 @@ class SuperResolutionGuiClass:
         # Add the functions here before the gui part starts.
         def convert_to_96x96_and_24x24():
             print("Ok im the function there all the converting should take place :)")
-
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
-
         def create_super_resolution_photo():
             print("Im the function that should take care of the Super Resolution Photo process. :)")
-
-
         """ 
         *   Some notes and explanation of the commands of a frame object.
         *************************************************************************************************************
