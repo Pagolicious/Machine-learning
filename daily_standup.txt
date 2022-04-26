@@ -62,3 +62,14 @@ Lenny make som improvment of the Gui to darkmode.
 Until next time:
 Planning the sprint, make a loss function.
 train the model if there is time.
+
+Daily stand-up 2022-04-26 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Charlie shows, how he implemented the creating the dataset with the Gui.
+Alexander shows us the model, that is taking place.
+
+
+Until next time:
+Oscar & Charlie: applying new feauters, to create dataset.
+Lenny: adding more stuff to the gui.
+Alexander: Continue work on model.
