@@ -1,9 +1,11 @@
 import sys
 import os
+import time
 import tkinter as tk
+import tkinter.filedialog
 import tkinter.ttk as ttk
 from tkinter.constants import *
-from tkinter import filedialog as fd
+from tkinter import filedialog as fd, filedialog
 from tkinter.messagebox import showinfo
 from PIL import ImageTk, Image
 from resize import resize_decrease
@@ -27,9 +29,41 @@ class SuperResolutionGuiClass:
         # Add the functions here before the gui part starts.
         def convert_to_96x96_and_24x24():
             print("Ok im the function there all the converting should take place :)")
-            in_folder = self.textbox1.get().replace('\\', '/')
-            out_folder = self.textbox3.get().replace('\\', '/')
+            in_folder = self.textbox1.get()
+            out_folder = self.textbox3.get()
             resize_decrease(in_folder, out_folder)
+
+            # crop the largest size square
+            def crop(img):
+                width, height = img.size
+                return img.crop(((width - min(img.size)) // 2, (height - min(img.size)) // 2,
+                                (width + min(img.size)) // 2, (height + min(img.size)) // 2))
+
+            try:
+                path_to = self.textbox1_var.get()
+                save_path = self.textbox3_var.get()
+                self.statusbar1['maximum'] = len(os.listdir(path_to))
+
+                for images in os.listdir(path_to):
+                    if images.endswith((".png", ".jpg", ".jpeg")):
+                        image_hr = Image.open(os.path.join(path_to, images))
+
+                        image_hr = crop(image_hr).resize((96, 96))
+                        image_lr = image_hr.copy().resize((24, 24))
+
+                        fn, fext = os.path.splitext(images)
+                        image_hr.save(f'{save_path}/%s_96%s' % (fn, fext))
+                        image_lr.save(f'{save_path}/%s_24%s' % (fn, fext))
+
+                        self.statusbar1['value'] += 1
+                        self.statusbar1.update()
+                        self.status_label1['text'] = "Status: {0:.0f}%".format(self.statusbar1['value']/len(os.listdir(path_to)) * 100)
+
+                showinfo(message='Dataset completed!')
+
+            except WindowsError:
+                showinfo(message='Insert a valid folder')
+
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
         def create_super_resolution_photo():
@@ -101,7 +135,8 @@ class SuperResolutionGuiClass:
         self.label_the_path_to_pictures.configure(foreground="white")
         self.label_the_path_to_pictures.configure(text='Path to your pictures')
 
-        self.textbox1 = tk.Entry(self.label_frame_create_own_dataset)
+        self.textbox1_var = tk.StringVar()
+        self.textbox1 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox1_var)
         self.textbox1.place(relx=0.018, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
 
         # Next textbox called textbox3 I made an error then I was thinking what was needed on the gui...
@@ -116,13 +151,13 @@ class SuperResolutionGuiClass:
         self.label_save_path.configure(text='Save path')
 
         # This textbox should hold the path you want your transformed pictures to, with lower quality.
-        self.textbox3 = tk.Entry(self.label_frame_create_own_dataset)
+        self.textbox3_var = tk.StringVar()
+        self.textbox3 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox3_var)
         self.textbox3.place(relx=0.544, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
 
         # Place a progressbar so the user can se that stuff happens and doesn't worry about that the app hangs.
-        self.statusbar1 = ttk.Progressbar(self.main_frame)
+        self.statusbar1 = ttk.Progressbar(self.main_frame, value=0, orient='horizontal', mode='determinate')
         self.statusbar1.place(relx=0.008, rely=0.314, relwidth=0.307, relheight=0.0, height=22)
-        self.statusbar1.configure(length="527")
 
         # Starting with the second labelframe, who contains train the model.
         # ********************************************************************
@@ -192,6 +227,7 @@ class SuperResolutionGuiClass:
         # ******************************************************************************
 
         # This one is with the create your own dataset
+        # self.status_label1_var = tk.StringVar()
         self.status_label1 = tk.Label(self.main_frame)
         self.status_label1.place(relx=0.001, rely=0.368, height=48, width=439)
         self.status_label1.configure(anchor='w')
