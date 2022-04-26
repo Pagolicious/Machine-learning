@@ -29,9 +29,7 @@ class SuperResolutionGuiClass:
         # Add the functions here before the gui part starts.
         def convert_to_96x96_and_24x24():
             print("Ok im the function there all the converting should take place :)")
-            in_folder = self.textbox1.get()
-            out_folder = self.textbox3.get()
-            resize_decrease(in_folder, out_folder)
+
 
             option = self.switch_var.get()
 
@@ -67,7 +65,10 @@ class SuperResolutionGuiClass:
 
                 except WindowsError:
                     showinfo(message='Insert a valid folder')
-
+            if option == '1':
+                in_folder = self.textbox1.get()
+                out_folder = self.textbox3.get()
+                resize_decrease(in_folder, out_folder)
             else:
                 showinfo(message='Select a dataset option')
 
