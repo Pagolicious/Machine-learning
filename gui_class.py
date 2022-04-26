@@ -37,6 +37,19 @@ class SuperResolutionGuiClass:
         def selected_option():
             print(f'You selected option: {str(self.choice.get())}')
 
+        def get_user_path_to_picture_folder():
+            self.textbox1.delete(0, 'end')
+            user_path_picture_folder = fd.askdirectory(parent=self.window, initialdir='/',
+                                                       title='Please select a directory')
+            self.textbox1.insert(0, user_path_picture_folder)
+
+        def store_user_path_to_save_picture_folder():
+            self.textbox3.delete(0, 'end')
+            user_path_to_save_picture_folder = fd.askdirectory(parent=self.window, initialdir='/',
+                                                               title='Please select where to save your pictures')
+            self.textbox3.insert(0, user_path_to_save_picture_folder)
+
+
         """ 
         *   Some notes and explanation of the commands of a frame object.
         *************************************************************************************************************
@@ -102,7 +115,7 @@ class SuperResolutionGuiClass:
         self.btn_file_dialog_path_to_your_pictures.configure(font="-family {Verdana} -size 10 -weight bold")
         self.btn_file_dialog_path_to_your_pictures.configure(background="white")
         self.btn_file_dialog_path_to_your_pictures.configure(text='Select your folder:')
-        self.btn_file_dialog_path_to_your_pictures.configure(command=lambda: convert_to_96x96_and_24x24())
+        self.btn_file_dialog_path_to_your_pictures.configure(command=lambda: get_user_path_to_picture_folder())
 
         # Placing a filedialog button to handle the save path of the pictures.
         self.btn_file_dialog_save_path_dataset = tk.Button(self.label_frame_create_own_dataset)
@@ -112,7 +125,7 @@ class SuperResolutionGuiClass:
         self.btn_file_dialog_save_path_dataset.configure(font="-family {Verdana} -size 10 -weight bold")
         self.btn_file_dialog_save_path_dataset.configure(background="white")
         self.btn_file_dialog_save_path_dataset.configure(text='Select your folder:')
-        self.btn_file_dialog_save_path_dataset.configure(command=lambda: convert_to_96x96_and_24x24())
+        self.btn_file_dialog_save_path_dataset.configure(command=lambda: store_user_path_to_save_picture_folder())
 
         # Placing the first option button aka radiobutton.
         self.style = ttk.Style()
@@ -136,11 +149,11 @@ class SuperResolutionGuiClass:
 
         # place the textbox1 inside the label_frame_create_own_dataset and a label path to pictures.
         self.label_the_path_to_pictures = tk.Label(self.label_frame_create_own_dataset)
-        self.label_the_path_to_pictures.place(relx=0.021, rely=0.1140, height=31, width=178, bordermode='ignore')
+        self.label_the_path_to_pictures.place(relx=0.021, rely=0.1140, height=31, width=220, bordermode='ignore')
         self.label_the_path_to_pictures.configure(background="#330066")
         self.label_the_path_to_pictures.configure(anchor='w')
         self.label_the_path_to_pictures.configure(compound='left')
-        self.label_the_path_to_pictures.configure(font="-family {Verdana} -size 10")
+        self.label_the_path_to_pictures.configure(font="-family {Verdana} -size 12")
         self.label_the_path_to_pictures.configure(foreground="white")
         self.label_the_path_to_pictures.configure(text='Path to your picture folder')
 
@@ -150,13 +163,13 @@ class SuperResolutionGuiClass:
         # Next textbox called textbox3 I made an error then I was thinking what was needed on the gui...
         # and placing the label to the textbox3, save path
         self.label_save_path = tk.Label(self.main_frame)
-        self.label_save_path.place(relx=0.008, rely=0.310, height=22, width=112)
+        self.label_save_path.place(relx=0.008, rely=0.310, height=22, width=200)
         self.label_save_path.configure(anchor='w')
         self.label_save_path.configure(compound='left')
         self.label_save_path.configure(background="#330066")
-        self.label_save_path.configure(font="-family {Verdana} -size 10")
+        self.label_save_path.configure(font="-family {Verdana} -size 12")
         self.label_save_path.configure(foreground="white")
-        self.label_save_path.configure(text='Save path folder')
+        self.label_save_path.configure(text='Save picture path folder')
 
         # This textbox should hold the path you want your transformed pictures to, with lower quality.
         self.textbox3 = tk.Entry(self.label_frame_create_own_dataset)
@@ -178,13 +191,13 @@ class SuperResolutionGuiClass:
 
         # Placing the label to the path to picture folder.
         self.label_path_to_picture_folder = tk.Label(self.labelframe_train_model)
-        self.label_path_to_picture_folder.place(relx=0.265, rely=0.113, height=31, width=227, bordermode='ignore')
+        self.label_path_to_picture_folder.place(relx=0.220, rely=0.113, height=31, width=320, bordermode='ignore')
         self.label_path_to_picture_folder.configure(anchor='w')
         self.label_path_to_picture_folder.configure(compound='left')
         self.label_path_to_picture_folder.configure(background="#330066")
-        self.label_path_to_picture_folder.configure(font="-family {Verdana} -size 10")
+        self.label_path_to_picture_folder.configure(font="-family {Verdana} -size 12")
         self.label_path_to_picture_folder.configure(foreground="white")
-        self.label_path_to_picture_folder.configure(text='Path to picture folder')
+        self.label_path_to_picture_folder.configure(text='Path to your training pictures folder')
 
         # Placing the textbox2 that should contain the path to the pictures the model needs to train.
         self.textbox2 = tk.Entry(self.labelframe_train_model)
