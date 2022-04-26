@@ -8,6 +8,7 @@ from tkinter.constants import *
 from tkinter import filedialog as fd, filedialog
 from tkinter.messagebox import showinfo
 from PIL import ImageTk, Image
+from resize import resize_decrease
 
 """
 *******************************************************************************************
@@ -27,6 +28,8 @@ class SuperResolutionGuiClass:
 
         # Add the functions here before the gui part starts.
         def convert_to_96x96_and_24x24():
+            print("Ok im the function there all the converting should take place :)")
+
 
             option = self.switch_var.get()
 
@@ -62,17 +65,17 @@ class SuperResolutionGuiClass:
 
                 except WindowsError:
                     showinfo(message='Insert a valid folder')
-
+            if option == '1':
+                in_folder = self.textbox1.get()
+                out_folder = self.textbox3.get()
+                resize_decrease(in_folder, out_folder)
             else:
                 showinfo(message='Select a dataset option')
 
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
-
         def create_super_resolution_photo():
             print("Im the function that should take care of the Super Resolution Photo process. :)")
-
-
         """ 
         *   Some notes and explanation of the commands of a frame object.
         *************************************************************************************************************
