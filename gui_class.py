@@ -33,36 +33,43 @@ class SuperResolutionGuiClass:
             out_folder = self.textbox3.get()
             resize_decrease(in_folder, out_folder)
 
-            # crop the largest size square
-            def crop(img):
-                width, height = img.size
-                return img.crop(((width - min(img.size)) // 2, (height - min(img.size)) // 2,
-                                (width + min(img.size)) // 2, (height + min(img.size)) // 2))
+            option = self.switch_var.get()
 
-            try:
-                path_to = self.textbox1_var.get()
-                save_path = self.textbox3_var.get()
-                self.statusbar1['maximum'] = len(os.listdir(path_to))
+            if option == '0':
 
-                for images in os.listdir(path_to):
-                    if images.endswith((".png", ".jpg", ".jpeg")):
-                        image_hr = Image.open(os.path.join(path_to, images))
+                # crop the largest size square
+                def crop(img):
+                    width, height = img.size
+                    return img.crop(((width - min(img.size)) // 2, (height - min(img.size)) // 2,
+                                    (width + min(img.size)) // 2, (height + min(img.size)) // 2))
 
-                        image_hr = crop(image_hr).resize((96, 96))
-                        image_lr = image_hr.copy().resize((24, 24))
+                try:
+                    path_to = self.textbox1_var.get()
+                    save_path = self.textbox3_var.get()
+                    self.statusbar1['maximum'] = len(os.listdir(path_to))
 
-                        fn, fext = os.path.splitext(images)
-                        image_hr.save(f'{save_path}/%s_96%s' % (fn, fext))
-                        image_lr.save(f'{save_path}/%s_24%s' % (fn, fext))
+                    for images in os.listdir(path_to):
+                        if images.endswith((".png", ".jpg", ".jpeg")):
+                            image_hr = Image.open(os.path.join(path_to, images))
 
-                        self.statusbar1['value'] += 1
-                        self.statusbar1.update()
-                        self.status_label1['text'] = "Status: {0:.0f}%".format(self.statusbar1['value']/len(os.listdir(path_to)) * 100)
+                            image_hr = crop(image_hr).resize((96, 96))
+                            image_lr = image_hr.copy().resize((24, 24))
 
-                showinfo(message='Dataset completed!')
+                            fn, fext = os.path.splitext(images)
+                            image_hr.save(f'{save_path}/%s_96%s' % (fn, fext))
+                            image_lr.save(f'{save_path}/%s_24%s' % (fn, fext))
 
-            except WindowsError:
-                showinfo(message='Insert a valid folder')
+                            self.statusbar1['value'] += 1
+                            self.statusbar1.update()
+                            self.status_label1['text'] = "Status: {0:.0f}%".format(self.statusbar1['value']/len(os.listdir(path_to)) * 100)
+
+                    showinfo(message='Dataset completed!')
+
+                except WindowsError:
+                    showinfo(message='Insert a valid folder')
+
+            else:
+                showinfo(message='Select a dataset option')
 
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
@@ -124,6 +131,25 @@ class SuperResolutionGuiClass:
         self.btn_create_dataset.configure(background="white")  # d9d9d9
         self.btn_create_dataset.configure(text='Create dataset')
         self.btn_create_dataset.configure(command=lambda: convert_to_96x96_and_24x24())
+
+        self.switch_var = tk.StringVar()
+        self.btn_dataset1 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Off", variable=self.switch_var,
+                                           indicatoron=False, value=0, width=8)
+
+        self.btn_dataset1.place(relx=0.025, rely=0.492, height=37, width=337, bordermode='ignore')
+        self.btn_dataset1.configure(compound='left')
+        self.btn_dataset1.configure(font="-family {Verdana} -size 10 -weight bold")
+        self.btn_dataset1.configure(background="white")  # d9d9d9
+        self.btn_dataset1.configure(text='Dataset Option 1')
+
+        self.btn_dataset2 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Low",
+                                           variable=self.switch_var,
+                                           indicatoron=False, value=1, width=8)
+        self.btn_dataset2.place(relx=0.025, rely=0.492, height=45, width=237, bordermode='ignore')
+        self.btn_dataset2.configure(compound='left')
+        self.btn_dataset2.configure(font="-family {Verdana} -size 10 -weight bold")
+        self.btn_dataset2.configure(background="white")  # d9d9d9
+        self.btn_dataset2.configure(text='Dataset Option 2')
 
         # place the textbox1 inside the label_frame_create_own_dataset and a label path to pictures.
         self.label_the_path_to_pictures = tk.Label(self.label_frame_create_own_dataset)
