@@ -23,6 +23,7 @@ def resize_decrease(in_folder, out_folder):
                 image_file_lowest = image_file.resize((new_width_small, int(new_height_small)))
                 image_file_lowest.save(f'{out_folder}/24x24-{images}')
 
+
             else:
                 new_height = 96
                 new_width = new_height * width / height
