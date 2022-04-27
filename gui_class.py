@@ -28,50 +28,47 @@ class SuperResolutionGuiClass:
         self.choice = tk.IntVar()
 
         # Add the functions here before the gui part starts.
-        def convert_to_96x96_and_24x24():
+        def with_crop():
             print("Ok im the function there all the converting should take place :)")
 
-            option = self.switch_var.get()
 
-            if option == '0':
 
-                # crop the largest size square
-                def crop(img):
-                    width, height = img.size
-                    return img.crop(((width - min(img.size)) // 2, (height - min(img.size)) // 2,
-                                     (width + min(img.size)) // 2, (height + min(img.size)) // 2))
+            # crop the largest size square
+            def crop(img):
+                width, height = img.size
+                return img.crop(((width - min(img.size)) // 2, (height - min(img.size)) // 2,
+                                 (width + min(img.size)) // 2, (height + min(img.size)) // 2))
 
-                try:
-                    path_to = self.textbox1_var.get()
-                    save_path = self.textbox3_var.get()
-                    self.statusbar1['maximum'] = len(os.listdir(path_to))
+            try:
+                path_to = self.textbox1_var.get()
+                save_path = self.textbox3_var.get()
+                self.statusbar1['maximum'] = len(os.listdir(path_to))
 
-                    for images in os.listdir(path_to):
-                        if images.endswith((".png", ".jpg", ".jpeg")):
-                            image_hr = Image.open(os.path.join(path_to, images))
+                for images in os.listdir(path_to):
+                    if images.endswith((".png", ".jpg", ".jpeg")):
+                        image_hr = Image.open(os.path.join(path_to, images))
 
-                            image_hr = crop(image_hr).resize((96, 96))
-                            image_lr = image_hr.copy().resize((24, 24))
+                        image_hr = crop(image_hr).resize((96, 96))
+                        image_lr = image_hr.copy().resize((24, 24))
 
-                            fn, fext = os.path.splitext(images)
-                            image_hr.save(f'{save_path}/%s_96%s' % (fn, fext))
-                            image_lr.save(f'{save_path}/%s_24%s' % (fn, fext))
+                        fn, fext = os.path.splitext(images)
+                        image_hr.save(f'{save_path}/%s_96%s' % (fn, fext))
+                        image_lr.save(f'{save_path}/%s_24%s' % (fn, fext))
 
-                            self.statusbar1['value'] += 1
-                            self.statusbar1.update()
-                            self.status_label1['text'] = "Status: {0:.0f}%".format(
-                                self.statusbar1['value'] / len(os.listdir(path_to)) * 100)
+                        self.statusbar1['value'] += 1
+                        self.statusbar1.update()
+                        self.status_label1['text'] = "Status: {0:.0f}% Complete".format(
+                            self.statusbar1['value'] / len(os.listdir(path_to)) * 100)
 
-                    showinfo(message='Dataset completed!')
+                showinfo(message='Dataset completed!')
 
-                except WindowsError:
-                    showinfo(message='Insert a valid folder')
-            if option == '1':
-                in_folder = self.textbox1.get()
-                out_folder = self.textbox3.get()
-                resize_decrease(in_folder, out_folder)
-            else:
-                showinfo(message='Select a dataset option')
+            except WindowsError:
+                showinfo(message='Insert a valid folder')
+
+        def without_crop():
+            in_folder = self.textbox1.get()
+            out_folder = self.textbox3.get()
+            resize_decrease(in_folder, out_folder)
 
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
@@ -81,6 +78,15 @@ class SuperResolutionGuiClass:
 
         def selected_option():
             print(f'You selected option: {str(self.choice.get())}')
+
+            option = self.choice.get()
+
+            if option == 0:
+                with_crop()
+            elif option == 1:
+                without_crop()
+            else:
+                showinfo(message='Select a dataset option')
 
         def get_user_path_to_picture_folder():
             self.textbox1.delete(0, 'end')
@@ -149,7 +155,7 @@ class SuperResolutionGuiClass:
         self.btn_create_dataset.configure(font="-family {Verdana} -size 10 -weight bold")
         self.btn_create_dataset.configure(background="white")  # d9d9d9
         self.btn_create_dataset.configure(text='Create dataset')
-        self.btn_create_dataset.configure(command=lambda: convert_to_96x96_and_24x24())
+        self.btn_create_dataset.configure(command=lambda: selected_option())
 
         # Placing a filedialog button to the path of your pictures.
         self.btn_file_dialog_path_to_your_pictures = tk.Button(self.label_frame_create_own_dataset)
@@ -179,14 +185,14 @@ class SuperResolutionGuiClass:
         self.style.configure('.', font="-family {Verdana} -size 10 -weight bold")
 
         self.radiobutton1 = ttk.Radiobutton(self.label_frame_create_own_dataset, text="Option 1", variable=self.choice,
-                                            value=1, command=lambda: selected_option())
+                                            value=0)
         self.radiobutton1.place(relx=0.550, rely=0.120, relwidth=0.215, relheight=0.049, height=21)
         self.radiobutton1.configure(compound='left')
         self.radiobutton1.configure(text='Crop pictures')
 
         # Place the second option button aka radiobutton 2 (Resize the pictures)
         self.radiobutton2 = ttk.Radiobutton(self.label_frame_create_own_dataset, text="Option 2", variable=self.choice,
-                                            value=2, command=lambda: selected_option())
+                                            value=1)
         self.radiobutton2.place(relx=0.550, rely=0.250, relwidth=0.250, relheight=0.049, height=21)
         self.radiobutton2.configure(compound='left')
         self.radiobutton2.configure(text='Resize pictures')
@@ -220,7 +226,8 @@ class SuperResolutionGuiClass:
         self.label_the_path_to_pictures.configure(foreground="white")
         self.label_the_path_to_pictures.configure(text='Path to your picture folder')
 
-        self.textbox1 = tk.Entry(self.label_frame_create_own_dataset)
+        self.textbox1_var = tk.StringVar()
+        self.textbox1 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox1_var)
         self.textbox1.place(relx=0.018, rely=0.200, height=20, relwidth=0.378, bordermode='ignore')
 
         # self.textbox1_var = tk.StringVar()
@@ -240,7 +247,8 @@ class SuperResolutionGuiClass:
 
         # This textbox should hold the path you want your transformed pictures to, with lower quality.
 
-        self.textbox3 = tk.Entry(self.label_frame_create_own_dataset)
+        self.textbox3_var = tk.StringVar()
+        self.textbox3 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox3_var)
         self.textbox3.place(relx=0.018, rely=0.430, height=20, relwidth=0.378, bordermode='ignore')
 
         # Place a progressbar so the user can se that stuff happens and doesn't worry about that the app hangs.
