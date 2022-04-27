@@ -31,7 +31,6 @@ class SuperResolutionGuiClass:
         def convert_to_96x96_and_24x24():
             print("Ok im the function there all the converting should take place :)")
 
-
             option = self.switch_var.get()
 
             if option == '0':
@@ -40,7 +39,7 @@ class SuperResolutionGuiClass:
                 def crop(img):
                     width, height = img.size
                     return img.crop(((width - min(img.size)) // 2, (height - min(img.size)) // 2,
-                                    (width + min(img.size)) // 2, (height + min(img.size)) // 2))
+                                     (width + min(img.size)) // 2, (height + min(img.size)) // 2))
 
                 try:
                     path_to = self.textbox1_var.get()
@@ -60,7 +59,8 @@ class SuperResolutionGuiClass:
 
                             self.statusbar1['value'] += 1
                             self.statusbar1.update()
-                            self.status_label1['text'] = "Status: {0:.0f}%".format(self.statusbar1['value']/len(os.listdir(path_to)) * 100)
+                            self.status_label1['text'] = "Status: {0:.0f}%".format(
+                                self.statusbar1['value'] / len(os.listdir(path_to)) * 100)
 
                     showinfo(message='Dataset completed!')
 
@@ -75,9 +75,9 @@ class SuperResolutionGuiClass:
 
         def training_the_model():
             print("Im the function that should train the model then the button is pressed. :)")
+
         def create_super_resolution_photo():
             print("Im the function that should take care of the Super Resolution Photo process. :)")
-
 
         def selected_option():
             print(f'You selected option: {str(self.choice.get())}')
@@ -93,9 +93,6 @@ class SuperResolutionGuiClass:
             user_path_to_save_picture_folder = fd.askdirectory(parent=self.window, initialdir='/',
                                                                title='Please select where to save your pictures')
             self.textbox3.insert(0, user_path_to_save_picture_folder)
-
-
-
 
         """ 
         *   Some notes and explanation of the commands of a frame object.
@@ -154,7 +151,6 @@ class SuperResolutionGuiClass:
         self.btn_create_dataset.configure(text='Create dataset')
         self.btn_create_dataset.configure(command=lambda: convert_to_96x96_and_24x24())
 
-
         # Placing a filedialog button to the path of your pictures.
         self.btn_file_dialog_path_to_your_pictures = tk.Button(self.label_frame_create_own_dataset)
         self.btn_file_dialog_path_to_your_pictures.place(relx=0.018, rely=0.260, height=24, relwidth=0.378,
@@ -195,25 +191,24 @@ class SuperResolutionGuiClass:
         self.radiobutton2.configure(compound='left')
         self.radiobutton2.configure(text='Resize pictures')
 
-        self.switch_var = tk.StringVar()
-        self.btn_dataset1 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Off", variable=self.switch_var,
-                                           indicatoron=False, value=0, width=8)
+        # self.switch_var = tk.StringVar()
+        # self.btn_dataset1 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Off", variable=self.switch_var,
+        #                                   indicatoron=False, value=0, width=8)
 
-        self.btn_dataset1.place(relx=0.025, rely=0.492, height=37, width=337, bordermode='ignore')
-        self.btn_dataset1.configure(compound='left')
-        self.btn_dataset1.configure(font="-family {Verdana} -size 10 -weight bold")
-        self.btn_dataset1.configure(background="white")  # d9d9d9
-        self.btn_dataset1.configure(text='Dataset Option 1')
-
-        self.btn_dataset2 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Low",
-                                           variable=self.switch_var,
-                                           indicatoron=False, value=1, width=8)
-        self.btn_dataset2.place(relx=0.025, rely=0.492, height=45, width=237, bordermode='ignore')
-        self.btn_dataset2.configure(compound='left')
-        self.btn_dataset2.configure(font="-family {Verdana} -size 10 -weight bold")
-        self.btn_dataset2.configure(background="white")  # d9d9d9
-        self.btn_dataset2.configure(text='Dataset Option 2')
-
+        # self.btn_dataset1.place(relx=0.025, rely=0.492, height=37, width=337, bordermode='ignore')
+        # self.btn_dataset1.configure(compound='left')
+        # self.btn_dataset1.configure(font="-family {Verdana} -size 10 -weight bold")
+        # self.btn_dataset1.configure(background="white")  # d9d9d9
+        # self.btn_dataset1.configure(text='Dataset Option 1')
+        #
+        # self.btn_dataset2 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Low",
+        #                                    variable=self.switch_var,
+        #                                    indicatoron=False, value=1, width=8)
+        # self.btn_dataset2.place(relx=0.025, rely=0.492, height=45, width=237, bordermode='ignore')
+        # self.btn_dataset2.configure(compound='left')
+        # self.btn_dataset2.configure(font="-family {Verdana} -size 10 -weight bold")
+        # self.btn_dataset2.configure(background="white")  # d9d9d9
+        # self.btn_dataset2.configure(text='Dataset Option 2')
 
         # place the textbox1 inside the label_frame_create_own_dataset and a label path to pictures.
         self.label_the_path_to_pictures = tk.Label(self.label_frame_create_own_dataset)
@@ -225,14 +220,12 @@ class SuperResolutionGuiClass:
         self.label_the_path_to_pictures.configure(foreground="white")
         self.label_the_path_to_pictures.configure(text='Path to your picture folder')
 
-
         self.textbox1 = tk.Entry(self.label_frame_create_own_dataset)
         self.textbox1.place(relx=0.018, rely=0.200, height=20, relwidth=0.378, bordermode='ignore')
 
-        self.textbox1_var = tk.StringVar()
-        self.textbox1 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox1_var)
-        self.textbox1.place(relx=0.018, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
-
+        # self.textbox1_var = tk.StringVar()
+        # self.textbox1 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox1_var)
+        # self.textbox1.place(relx=0.018, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
 
         # Next textbox called textbox3 I made an error then I was thinking what was needed on the gui...
         # and placing the label to the textbox3, save path
@@ -255,14 +248,13 @@ class SuperResolutionGuiClass:
         self.statusbar1.place(relx=0.008, rely=0.514, relwidth=0.307, relheight=0.0, height=22)
         self.statusbar1.configure(length="527")
 
-        self.textbox3_var = tk.StringVar()
-        self.textbox3 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox3_var)
-        self.textbox3.place(relx=0.544, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
+        # self.textbox3_var = tk.StringVar()
+        # self.textbox3 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox3_var)
+        # self.textbox3.place(relx=0.544, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
 
         # Place a progressbar so the user can se that stuff happens and doesn't worry about that the app hangs.
-        self.statusbar1 = ttk.Progressbar(self.main_frame, value=0, orient='horizontal', mode='determinate')
-        self.statusbar1.place(relx=0.008, rely=0.314, relwidth=0.307, relheight=0.0, height=22)
-
+        # self.statusbar1 = ttk.Progressbar(self.main_frame, value=0, orient='horizontal', mode='determinate')
+        # self.statusbar1.place(relx=0.008, rely=0.314, relwidth=0.307, relheight=0.0, height=22)
 
         # Starting with the second labelframe, who contains train the model.
         # ********************************************************************
