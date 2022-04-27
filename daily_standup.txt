@@ -73,3 +73,14 @@ Until next time:
 Oscar & Charlie: applying new feauters, to create dataset.
 Lenny: adding more stuff to the gui.
 Alexander: Continue work on model.
+
+Daily stand-up 2022-04-27 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Charlie and Oscar implemented both resize functions
+Lenny added more features, options for resize function and folder chooser
+Alexander have been starting to testing the model
+
+Until next time:
+Oscar & Charlie: fixing bugs and looking into possible adding more stuff that can be useful.
+Lenny: adding more stuff to the gui.
+Alexander: Continue work on model.
