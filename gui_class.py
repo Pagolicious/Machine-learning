@@ -31,8 +31,6 @@ class SuperResolutionGuiClass:
         def with_crop():
             print("Ok im the function there all the converting should take place :)")
 
-
-
             # crop the largest size square
             def crop(img):
                 width, height = img.size
@@ -245,25 +243,6 @@ class SuperResolutionGuiClass:
         self.radiobutton2.configure(compound='left')
         self.radiobutton2.configure(text='Resize pictures')
 
-        # self.switch_var = tk.StringVar()
-        # self.btn_dataset1 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Off", variable=self.switch_var,
-        #                                   indicatoron=False, value=0, width=8)
-
-        # self.btn_dataset1.place(relx=0.025, rely=0.492, height=37, width=337, bordermode='ignore')
-        # self.btn_dataset1.configure(compound='left')
-        # self.btn_dataset1.configure(font="-family {Verdana} -size 10 -weight bold")
-        # self.btn_dataset1.configure(background="white")  # d9d9d9
-        # self.btn_dataset1.configure(text='Dataset Option 1')
-        #
-        # self.btn_dataset2 = tk.Radiobutton(self.label_frame_create_own_dataset, text="Low",
-        #                                    variable=self.switch_var,
-        #                                    indicatoron=False, value=1, width=8)
-        # self.btn_dataset2.place(relx=0.025, rely=0.492, height=45, width=237, bordermode='ignore')
-        # self.btn_dataset2.configure(compound='left')
-        # self.btn_dataset2.configure(font="-family {Verdana} -size 10 -weight bold")
-        # self.btn_dataset2.configure(background="white")  # d9d9d9
-        # self.btn_dataset2.configure(text='Dataset Option 2')
-
         # place the textbox1 inside the label_frame_create_own_dataset and a label path to pictures.
         self.label_the_path_to_pictures = tk.Label(self.label_frame_create_own_dataset)
         self.label_the_path_to_pictures.place(relx=0.021, rely=0.1140, height=31, width=220, bordermode='ignore')
@@ -278,9 +257,25 @@ class SuperResolutionGuiClass:
         self.textbox1 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox1_var)
         self.textbox1.place(relx=0.018, rely=0.200, height=20, relwidth=0.378, bordermode='ignore')
 
-        # self.textbox1_var = tk.StringVar()
-        # self.textbox1 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox1_var)
-        # self.textbox1.place(relx=0.018, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
+        # Adding labels to the image size boxes.
+        self.user_setting_image_size_label = tk.Label(self.label_frame_create_own_dataset)
+        self.user_setting_image_size_label.place(relx=0.545, rely=0.4000, height=31, width=220, bordermode='ignore')
+        self.user_setting_image_size_label.configure(background="#330066")
+        self.user_setting_image_size_label.configure(anchor='w')
+        self.user_setting_image_size_label.configure(compound='left')
+        self.user_setting_image_size_label.configure(font="-family {Verdana} -size 12")
+        self.user_setting_image_size_label.configure(foreground="white")
+        self.user_setting_image_size_label.configure(text='Height and Width')
+
+        # Adding 2 moore textboxes so the user can decide the image size , if he want to.
+
+        self.textbox4_var = tk.StringVar()
+        self.textbox4 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox4_var)
+        self.textbox4.place(relx=0.550, rely=0.500, height=20, relwidth=0.100, bordermode='ignore')
+
+        self.textbox5_var = tk.StringVar()
+        self.textbox5 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox5_var)
+        self.textbox5.place(relx=0.720, rely=0.500, height=20, relwidth=0.100, bordermode='ignore')
 
         # Next textbox called textbox3 I made an error then I was thinking what was needed on the gui...
         # and placing the label to the textbox3, save path
@@ -303,14 +298,6 @@ class SuperResolutionGuiClass:
         self.statusbar1 = ttk.Progressbar(self.main_frame)
         self.statusbar1.place(relx=0.008, rely=0.514, relwidth=0.307, relheight=0.0, height=22)
         self.statusbar1.configure(length="527")
-
-        # self.textbox3_var = tk.StringVar()
-        # self.textbox3 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox3_var)
-        # self.textbox3.place(relx=0.544, rely=0.271, height=20, relwidth=0.378, bordermode='ignore')
-
-        # Place a progressbar so the user can se that stuff happens and doesn't worry about that the app hangs.
-        # self.statusbar1 = ttk.Progressbar(self.main_frame, value=0, orient='horizontal', mode='determinate')
-        # self.statusbar1.place(relx=0.008, rely=0.314, relwidth=0.307, relheight=0.0, height=22)
 
         # Starting with the second labelframe, who contains train the model.
         # ********************************************************************
