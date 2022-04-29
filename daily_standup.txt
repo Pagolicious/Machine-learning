@@ -95,3 +95,11 @@ Alexander: VGG loss implementation with Oscar
 Oscar: Look at model and loss function
 Charlie: continue work on GUI
 
+Daily stand-up 2022-04-29 13:00
+Present during meeting: Alexander, Oscar and Charlie
+Alexander & Oscar: Researched different parts of the SRGAN model 
+Charlie: worked with GUI
+
+Until next time:
+Alexander & Oscar: Try to see if we can test the whole SRGAN process
+Charlie: continue work on GUI, sort in different files
