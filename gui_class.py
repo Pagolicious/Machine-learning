@@ -113,7 +113,8 @@ class SuperResolutionGuiClass:
                                 image_file_lower = image_file.resize((new_width, int(new_height)))
                                 image_file_lower.save(f'{out_folder}/{new_width}x{round(new_height)}-{images}')
                                 image_file_lowest = image_file.resize((new_width_small, int(new_height_small)))
-                                image_file_lowest.save(f'{out_folder}/{new_width_small}x{round(new_height_small)}-{images}')
+                                image_file_lowest.save(
+                                    f'{out_folder}/{new_width_small}x{round(new_height_small)}-{images}')
 
                             else:
                                 new_height = round(int(height_option))
@@ -124,7 +125,8 @@ class SuperResolutionGuiClass:
                                 image_file_lower = image_file.resize((int(new_width), new_height))
                                 image_file_lower.save(f'{out_folder}/{round(new_width)}x{new_height}-{images}')
                                 image_file_lowest = image_file.resize((int(new_width_small), new_height_small))
-                                image_file_lowest.save(f'{out_folder}/{round(new_width_small)}x{new_height_small}-{images}')
+                                image_file_lowest.save(
+                                    f'{out_folder}/{round(new_width_small)}x{new_height_small}-{images}')
 
                         else:
                             width = float(image_file.size[0])
@@ -194,6 +196,117 @@ class SuperResolutionGuiClass:
             user_path_to_save_picture_folder = fd.askdirectory(parent=self.window, initialdir='/',
                                                                title='Please select where to save your pictures')
             self.textbox3.insert(0, user_path_to_save_picture_folder)
+
+        def config_settings_window():
+            self.settings_window = tk.Toplevel(self.window)
+            self.settings_window_height = 600
+            self.settings_window_width = 600
+
+            # Try to center the new window.
+            screen_width = self.settings_window.winfo_screenwidth()
+            screen_height = self.settings_window.winfo_screenheight()
+            self.settings_window_x_cord = int((screen_width / 2) - (self.settings_window_width / 2))
+            self.settings_window_y_cord = int((screen_height / 2) - (self.settings_window_height / 2))
+            self.settings_window.geometry("{}x{}+{}+{}".format(self.settings_window_width, self.settings_window_height,
+                                                               self.settings_window_x_cord,
+                                                               self.settings_window_y_cord))
+            self.settings_window.title('Train Config Window')
+            self.settings_window.resizable(False, False)
+
+            # Add the controls to the new window.
+
+            # 1) adding a frame to the settings_window
+            self.settings_window_frame = tk.Frame(self.settings_window)
+            self.settings_window_frame.place(relx=0.01, rely=0.02, relheight=0.950, relwidth=0.980)
+            self.settings_window_frame.configure(relief='ridge')
+            self.settings_window_frame.configure(borderwidth="2")
+            self.settings_window_frame.configure(background="black")
+
+            # 2) Now place the inside frame with the nice purple look.
+            self.inside_frame = tk.Frame(self.settings_window)
+            self.inside_frame.place(relx=0.02, rely=0.04, relheight=0.918, relwidth=0.960)
+            self.inside_frame.configure(relief='ridge')
+            self.inside_frame.configure(borderwidth="2")
+            self.inside_frame.configure(background="#330066")
+
+            # 3) Add the labels we,are going to need.
+            self.number_of_epoch_label = tk.Label(self.settings_window)
+            self.number_of_epoch_label.place(relx=0.24, rely=0.20, height=31, width=290, bordermode='ignore')
+            self.number_of_epoch_label.configure(background="#330066")
+            self.number_of_epoch_label.configure(anchor='w')
+            self.number_of_epoch_label.configure(compound='left')
+            self.number_of_epoch_label.configure(font="-family {Verdana} -size 12")
+            self.number_of_epoch_label.configure(foreground="white")
+            self.number_of_epoch_label.configure(text='Set the number of training epochs:')
+
+            # 4) Add the textbox to hold the number of epochs the user enter.
+            self.number_of_epoch_textbox_var = tk.StringVar()
+            self.number_of_epoch_textbox = tk.Entry(self.settings_window, textvariable=self.number_of_epoch_textbox_var)
+            self.number_of_epoch_textbox.place(relx=0.25, rely=0.25, height=20, relwidth=0.470, bordermode='ignore')
+
+            # 5) Add the Batch size label:
+            self.batch_size_label = tk.Label(self.settings_window)
+            self.batch_size_label.place(relx=0.25, rely=0.30, height=31, width=290, bordermode='ignore')
+            self.batch_size_label.configure(background="#330066")
+            self.batch_size_label.configure(anchor='w')
+            self.batch_size_label.configure(compound='left')
+            self.batch_size_label.configure(font="-family {Verdana} -size 12")
+            self.batch_size_label.configure(foreground="white")
+            self.batch_size_label.configure(text='Set Batch Size:')
+
+            # 6) Add Batch Size textbox:
+            self.batch_size_textbox_var = tk.StringVar()
+            self.batch_size_textbox = tk.Entry(self.settings_window, textvariable=self.batch_size_textbox_var)
+            self.batch_size_textbox.place(relx=0.25, rely=0.35, height=20, relwidth=0.470, bordermode='ignore')
+
+            # 7) Add the Number of workers label:
+            self.number_of_workers_label = tk.Label(self.settings_window)
+            self.number_of_workers_label.place(relx=0.25, rely=0.40, height=31, width=290, bordermode='ignore')
+            self.number_of_workers_label.configure(background="#330066")
+            self.number_of_workers_label.configure(anchor='w')
+            self.number_of_workers_label.configure(compound='left')
+            self.number_of_workers_label.configure(font="-family {Verdana} -size 12")
+            self.number_of_workers_label.configure(foreground="white")
+            self.number_of_workers_label.configure(text='Set Number Of Workers:')
+
+            # 8) Add the number of workers textbox:
+            self.number_of_workers_textbox_var = tk.StringVar()
+            self.number_of_workers_textbox = tk.Entry(self.settings_window,
+                                                      textvariable=self.number_of_workers_textbox_var)
+            self.number_of_workers_textbox.place(relx=0.25, rely=0.45, height=20, relwidth=0.470, bordermode='ignore')
+
+            # 9) Add the set high_res label:
+            self.set_high_res_label = tk.Label(self.settings_window)
+            self.set_high_res_label.place(relx=0.25, rely=0.50, height=31, width=290, bordermode='ignore')
+            self.set_high_res_label.configure(background="#330066")
+            self.set_high_res_label.configure(anchor='w')
+            self.set_high_res_label.configure(compound='left')
+            self.set_high_res_label.configure(font="-family {Verdana} -size 12")
+            self.set_high_res_label.configure(foreground="white")
+            self.set_high_res_label.configure(text='Set High Res:')
+
+            # 10) Add the set Highres textbox.
+            self.set_high_res_textbox_var = tk.StringVar()
+            self.set_high_res_textbox = tk.Entry(self.settings_window,
+                                                 textvariable=self.set_high_res_textbox_var)
+            self.set_high_res_textbox.place(relx=0.25, rely=0.55, height=20, relwidth=0.470, bordermode='ignore')
+
+            # 11) Add the Save And Exit Button.
+            self.btn_save_and_exit_config = tk.Button(self.settings_window)
+            self.btn_save_and_exit_config.place(relx=0.25, rely=0.62, height=34, width=283, bordermode='ignore')
+            self.btn_save_and_exit_config.configure(compound='left')
+            self.btn_save_and_exit_config.configure(font="-family {Verdana} -size 10 -weight bold")
+            self.btn_save_and_exit_config.configure(background="white")  # d9d9d9
+            self.btn_save_and_exit_config.configure(text='Save And Exit Config Settings:')
+            self.btn_save_and_exit_config.configure(command=lambda: save_settings(self.settings_window))
+
+        def save_settings(x):
+            self.settings_window = x
+
+            # Save routine should go here:
+
+            # this should come last, because this removes the window.
+            self.settings_window.destroy()
 
         """ 
         *   Some notes and explanation of the commands of a frame object.
@@ -381,9 +494,19 @@ class SuperResolutionGuiClass:
         self.btn_train_model.configure(text='Train model')
         self.btn_train_model.configure(command=lambda: training_the_model())
 
+        # Placing the config button
+        self.btn_train_config = tk.Button(self.main_frame)
+        self.btn_train_config.place(relx=0.365, rely=0.330, height=34, width=387)
+        self.btn_train_config.configure(background="white")
+        self.btn_train_config.configure(compound='left')
+        self.btn_train_config.configure(font="-family {Verdana} -size 10 -weight bold")
+        self.btn_train_config.configure(foreground="#000000")
+        self.btn_train_config.configure(text='Enter Config Settings')
+        self.btn_train_config.configure(command=lambda: config_settings_window())
+
         # Placing a statusbar, so we can se the training progress.
         self.statusbar2 = ttk.Progressbar(self.main_frame)
-        self.statusbar2.place(relx=0.365, rely=0.314, relwidth=0.223, relheight=0.0, height=22)
+        self.statusbar2.place(relx=0.365, rely=0.514, relwidth=0.223, relheight=0.0, height=22)
         self.statusbar2.configure(length="384")
 
         # Starts with creating the Super Resolution labelframe.
