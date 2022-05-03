@@ -67,7 +67,7 @@ def main():
 
     if config.LOAD_MODEL:
         load_checkpoint(
-            config.CHECKPINT_GEN,
+            config.CHECKPOINT_GEN,
             gen,
             opt_gen,
             config.LEARNING_RATE,
