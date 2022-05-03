@@ -114,3 +114,16 @@ Charlie: Implemented the option to choose size for the dataset images in GUI
 Until next time:
 Charlie, Alexander and Oscar: Training discriminator and generator model and learn more about it
 Lenny: Implementing GUI config window
+
+Daily stand-up 2022-05-03 09:02
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: Added settings window to GUI
+Alexander: Had success training with L2loss however had issues when changing to VGG + adversarial loss
+Charlie: Had issues with training the model
+Oscar: Trained with VGG + adversarial loss
+
+Until next time:
+Lenny: Add so that u can change from settings
+Alexander: Check why we had issues with VGG + adversarial loss
+Oscar: Continue training
+Charlie: Continue training
