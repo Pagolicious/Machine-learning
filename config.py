@@ -9,10 +9,31 @@ CHECKPOINT_GEN = "gen.pth.tar"
 CHECKPOINT_DISC = "disc.pth.tar"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 LEARNING_RATE = 1e-4
-NUM_EPOCHS = 100
-BATCH_SIZE = 16
-NUM_WORKERS = 4
-HIGH_RES = 96
+
+
+# The load settings file function goes here:
+def load_config_constant_values():
+    with open("settings.txt", mode="r") as file:
+        file_line = file.read()
+        settings_item_list = file_line.split(",")
+
+        # Unpack the setting items to the right owners:
+        num_epochs, batch_size, num_workers, high_res = settings_item_list
+
+        # convert the values to integers as we want them so.
+        num_epochs = int(num_epochs)
+        batch_size = int(batch_size)
+        num_workers = int(num_workers)
+        high_res = int(high_res)
+
+    return num_epochs, batch_size, num_workers, high_res
+
+
+# NUM_EPOCHS = 100
+# BATCH_SIZE = 16
+# NUM_WORKERS = 4
+# HIGH_RES = 96
+NUM_EPOCHS, BATCH_SIZE, NUM_WORKERS, HIGH_RES = load_config_constant_values()
 LOW_RES = HIGH_RES // 4
 IMG_CHANNELS = 3
 

@@ -10,6 +10,7 @@ from tqdm import tqdm
 from dataset import MyImageFolder
 
 torch.backends.cudnn.benchmark = True
+config.load_config_constant_values()
 
 
 def train_fn(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss):

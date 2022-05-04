@@ -298,12 +298,60 @@ class SuperResolutionGuiClass:
             self.btn_save_and_exit_config.configure(font="-family {Verdana} -size 10 -weight bold")
             self.btn_save_and_exit_config.configure(background="white")  # d9d9d9
             self.btn_save_and_exit_config.configure(text='Save And Exit Config Settings:')
-            self.btn_save_and_exit_config.configure(command=lambda: save_settings(self.settings_window))
 
-        def save_settings(x):
+            # Collect the settings the user entered.
+            # sv = save variable
+            sv1 = self.number_of_epoch_textbox_var
+            sv2 = self.batch_size_textbox_var
+            sv3 = self.number_of_workers_textbox_var
+            sv4 = self.set_high_res_textbox_var
+
+            self.btn_save_and_exit_config.configure(
+                command=lambda: save_settings(self.settings_window, sv1, sv2, sv3, sv4))
+
+        def save_settings(x, sv1, sv2, sv3, sv4):
             self.settings_window = x
 
-            # Save routine should go here:
+            # Do some validation and error handling.
+            # Make sure the user enters only numbers and not any empty boxes.
+            try:
+
+                self.sv1_num_epoch = int(sv1.get())
+                self.sv2_batch_size = int(sv2.get())
+                self.sv3_num_workers = int(sv3.get())
+                self.sv4_set_high_res = int(sv4.get())
+
+            except ValueError:
+                tkinter.messagebox.showerror("Error:", "Most only have numbers:")
+
+            # Do a check so the boxes is not contains the value 0
+            # if there is 0 il reset it to the standard paper value.
+            # unsure about the workers tho , maybe you want train with 0 workers in som rare occasions ?
+            # But if that´s the case we just erase the num worker check in a later issue card.
+
+            if self.sv1_num_epoch == 0:
+                self.sv1_num_epoch = 100
+            if self.sv2_batch_size == 0:
+                self.sv2_batch_size = 16
+            if self.sv3_num_workers == 0:
+                self.sv3_num_workers = 4
+            if self.sv4_set_high_res == 0:
+                self.sv4_set_high_res = 96
+
+            # Save routine goes here:
+
+            with open("settings.txt", mode="w") as file:
+                try:
+                    file.write(
+                        f'{self.sv1_num_epoch},{self.sv2_batch_size},{self.sv3_num_workers},{self.sv4_set_high_res}')
+
+                    # Extra protection is good :) even it´s a context manager.
+                    file.close()
+
+                except IOError:
+                    tkinter.messagebox.showerror("Error:", "Something went wrong with saving file:")
+
+            tkinter.messagebox.showinfo("Information:", "Saved the settings.")
 
             # this should come last, because this removes the window.
             self.settings_window.destroy()
