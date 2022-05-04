@@ -127,3 +127,16 @@ Lenny: Add so that u can change from settings
 Alexander: Check why we had issues with VGG + adversarial loss
 Oscar: Continue training
 Charlie: Continue training
+
+Daily stand-up 2022-05-04 13:30
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: Can now change config from gui
+Alexander: Had success training with L2loss and VGG + adversarial loss
+Charlie: Tried different settings and made good progress
+Oscar: Trained with mostly l2 loss
+
+Until next time:
+Lenny: Looking into colaboratory and training
+Alexander: More testing and also looking into colaboratory
+Oscar: Continue training, look for tips from people that has used simliar programs before
+Charlie: Continue training
