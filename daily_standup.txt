@@ -140,3 +140,13 @@ Lenny: Looking into colaboratory and training
 Alexander: More testing and also looking into colaboratory
 Oscar: Continue training, look for tips from people that has used simliar programs before
 Charlie: Continue training
+
+Daily stand-up 2022-05-12
+Alexander, Lenny, Oscar and Charlie are present during meeting:
+Everybody been working with modell and colab.
+
+Until next time:
+Oscar checking flask, and the compability with SRGAN
+Alexander, checking drag and drop with tkinter, so we maybe can incoporate it later into the GUI.
+Charlie: Working with the model, and trying to fix colab settings, not working as it should.
+Lenny: trying to improve the colors in the model. Have an idea of maybe how to solve the color issue.
