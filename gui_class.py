@@ -8,6 +8,8 @@ from tkinter.constants import *
 from tkinter import filedialog as fd, filedialog
 from tkinter.messagebox import showinfo
 from PIL import ImageTk, Image
+import config
+import train
 from resize import resize_decrease
 
 """
@@ -20,12 +22,15 @@ it should also handle all the functions and actions then pressing buttons etc.
 
 
 class SuperResolutionGuiClass:
+    uw = None
+
     def __init__(self, user_window):
         self.window = user_window
         self.window.title('Super Resolution Application Dark Mode')
         self.window.geometry('1764x968+71+7')
         self.window.resizable(False, False)
         self.choice = tk.IntVar()
+        SuperResolutionGuiClass.uw = self
 
         # Add the functions here before the gui part starts.
 
@@ -168,7 +173,9 @@ class SuperResolutionGuiClass:
                 showinfo(message='Insert a valid folder')
 
         def training_the_model():
-            print("Im the function that should train the model then the button is pressed. :)")
+
+            # Call the training function, from the train.py file.
+            train.main()
 
         def create_super_resolution_photo():
             print("Im the function that should take care of the Super Resolution Photo process. :)")

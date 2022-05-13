@@ -14,7 +14,8 @@ def main():
 
     # Creating the user window object that holds all the attributes and functions of the window the
     # user see on the screen.
-    uw = SuperResolutionGuiClass(window)
+
+    SuperResolutionGuiClass(window)
 
     # This line is the command that keeps the window open, so we can see it.
     window.mainloop()
