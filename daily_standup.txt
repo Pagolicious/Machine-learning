@@ -150,3 +150,13 @@ Oscar checking flask, and the compability with SRGAN
 Alexander, checking drag and drop with tkinter, so we maybe can incoporate it later into the GUI.
 Charlie: Working with the model, and trying to fix colab settings, not working as it should.
 Lenny: trying to improve the colors in the model. Have an idea of maybe how to solve the color issue.
+
+Daily stand-up 2022-05-12
+Lenny, Oscar is present at meeting.
+Oscar was checking flask, for possibilities to build an nice GUI.
+Lenny was trying to fix color problems, not succesfull.
+
+Until next time:
+Oscar working with flask.
+Lenny is working to see if its possible to train from GUI, and are looking at hardcoded paths in the training file.
+
