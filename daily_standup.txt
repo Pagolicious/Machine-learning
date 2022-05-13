@@ -151,7 +151,7 @@ Alexander, checking drag and drop with tkinter, so we maybe can incoporate it la
 Charlie: Working with the model, and trying to fix colab settings, not working as it should.
 Lenny: trying to improve the colors in the model. Have an idea of maybe how to solve the color issue.
 
-Daily stand-up 2022-05-12
+Daily stand-up 2022-05-13
 Lenny, Oscar is present at meeting.
 Oscar was checking flask, for possibilities to build an nice GUI.
 Lenny was trying to fix color problems, not succesfull.
