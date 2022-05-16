@@ -2,16 +2,22 @@ import torch
 import config
 from torch import nn
 from torch import optim
+
+# import gui_class
+
 from utils import load_checkpoint, save_checkpoint, plot_examples
 from loss import VGGLoss
 from torch.utils.data import DataLoader
 from model import Generator, Discriminator
 from tqdm import tqdm
 from dataset import MyImageFolder
+# from uw_module import *
 
 torch.backends.cudnn.benchmark = True
 config.load_config_constant_values()
 
+
+# gui_class.SuperResolutionGuiClass.statusbar2['maximum'] = config.NUM_EPOCHS
 
 def train_fn(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss):
     loop = tqdm(loader, leave=True)
@@ -77,8 +83,28 @@ def main():
             config.CHECKPOINT_DISC, disc, opt_disc, config.LEARNING_RATE,
         )
 
+        # Making a local import to avoid circular import error.
+    from gui_class import SuperResolutionGuiClass
+    uw = SuperResolutionGuiClass.uw
+
     for epoch in range(config.NUM_EPOCHS):
+        uw.statusbar2['maximum'] = config.NUM_EPOCHS
+        if config.DEVICE == "cuda":
+
+            # Empty the cache memory in the cuda before we do next iteration.
+            torch.cuda.empty_cache()
+            torch.cuda.memory_summary(device=config.DEVICE, abbreviated=True)
+            print("Empty cache memory")
+
+        # Tell the user what epoch we are on.
+        print(f' Epoch number: {epoch} with Device: {config.DEVICE}')
+
         train_fn(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss)
+
+        uw.statusbar2['value'] += 1
+        uw.statusbar2.update()
+        uw.status_label2['text'] = "Status: {0:.0f}% Complete".format(
+            uw.statusbar2['value'] / config.NUM_EPOCHS * 100)
 
         if config.SAVE_MODEL:
             save_checkpoint(gen, opt_gen, filename=config.CHECKPOINT_GEN)
