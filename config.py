@@ -14,27 +14,35 @@ LEARNING_RATE = 1e-4
 # The load settings file function goes here:
 def load_config_constant_values():
     with open("settings.txt", mode="r") as file:
+        settings_item_listsettings_item_list = ""
         file_line = file.read()
         settings_item_list = file_line.split(",")
 
         # Unpack the setting items to the right owners:
-        num_epochs, batch_size, num_workers, high_res = settings_item_list
+        the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice = settings_item_list
 
         # convert the values to integers as we want them so.
-        num_epochs = int(num_epochs)
-        batch_size = int(batch_size)
-        num_workers = int(num_workers)
-        high_res = int(high_res)
+        the_num_epochs = int(the_num_epochs)
+        the_batch_size = int(the_batch_size)
+        the_num_workers = int(the_num_workers)
+        the_high_res = int(the_high_res)
+        the_training_choice = int(the_training_choice)
 
-    return num_epochs, batch_size, num_workers, high_res
+    return the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice
 
 
 # NUM_EPOCHS = 100
 # BATCH_SIZE = 16
 # NUM_WORKERS = 4
 # HIGH_RES = 96
-NUM_EPOCHS, BATCH_SIZE, NUM_WORKERS, HIGH_RES = load_config_constant_values()
-LOW_RES = HIGH_RES // 4
+
+# Getting problem then trying to reload the values, because they are constants
+# so have to change them to non constants.
+# NUM_EPOCHS, BATCH_SIZE, NUM_WORKERS, HIGH_RES, TRAINING_CHOICE = load_config_constant_values()
+num_epochs, batch_size, num_workers, high_res, training_choice = load_config_constant_values()
+
+# LOW_RES = HIGH_RES // 4
+LOW_RES = high_res // 4
 IMG_CHANNELS = 3
 
 highres_transform = A.Compose(
@@ -54,7 +62,7 @@ lowres_transform = A.Compose(
 
 both_transforms = A.Compose(
     [
-        A.RandomCrop(width=HIGH_RES, height=HIGH_RES),
+        A.RandomCrop(width=high_res, height=high_res),
         A.HorizontalFlip(p=0.5),
         A.RandomRotate90(p=0.5),
     ]
