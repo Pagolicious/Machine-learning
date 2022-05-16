@@ -160,3 +160,14 @@ Until next time:
 Oscar working with flask.
 Lenny is working to see if its possible to train from GUI, and are looking at hardcoded paths in the training file.
 
+
+Daily stand-up 2022-05-16
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+Lenny working, with GUI and the training feature.
+Oscar working with Flask GUI.
+Alexander working with one pic resolution creation.
+Charlie, is working: The model, and Flask. 
+
+The group is planning the sprint of the week.
+
+
