@@ -192,6 +192,7 @@ def main():
         uw.statusbar2.update()
         uw.status_label2['text'] = "Status: {0:.0f}% Complete".format(
             uw.statusbar2['value'] / the_num_epochs * 100)
+        uw.status_label2.update()
 
         if config.SAVE_MODEL:
             save_checkpoint(gen, opt_gen, filename=config.CHECKPOINT_GEN)
