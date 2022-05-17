@@ -27,7 +27,8 @@ def config_updater_function():
         settings_item_list = file_line.split(",")
 
         # Unpack the setting items to the right owners:
-        the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice = settings_item_list
+        the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice, \
+        the_model_choice = settings_item_list
 
         # convert the values to integers as we want them so.
         the_num_epochs = int(the_num_epochs)
@@ -35,8 +36,9 @@ def config_updater_function():
         the_num_workers = int(the_num_workers)
         the_high_res = int(the_high_res)
         the_training_choice = int(the_training_choice)
+        the_model_choice = int(the_model_choice)
 
-    return the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice
+    return the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice, the_model_choice
 
 
 # gui_class.SuperResolutionGuiClass.statusbar2['maximum'] = config.NUM_EPOCHS
@@ -115,7 +117,9 @@ def train_fn2(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss):
 
 def main():
     # config.load_config_constant_values()
-    the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice = config_updater_function()
+    the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice,\
+    the_model_choice = config_updater_function()
+
     from gui_class import SuperResolutionGuiClass
     uw = SuperResolutionGuiClass.uw
     uw.statusbar2['value'] = 0
@@ -146,7 +150,7 @@ def main():
     bce = nn.BCEWithLogitsLoss()
     vgg_loss = VGGLoss()
 
-    if config.LOAD_MODEL:
+    if the_model_choice == 0:
         load_checkpoint(
             config.CHECKPOINT_GEN,
             gen,
@@ -194,7 +198,7 @@ def main():
             uw.statusbar2['value'] / the_num_epochs * 100)
         uw.status_label2.update()
 
-        if config.SAVE_MODEL:
+        if the_model_choice == 1:
             save_checkpoint(gen, opt_gen, filename=config.CHECKPOINT_GEN)
             save_checkpoint(disc, opt_disc, filename=config.CHECKPOINT_DISC)
 
