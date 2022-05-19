@@ -26,11 +26,15 @@ class SuperResolutionGuiClass:
     uw = None
 
     def __init__(self, user_window):
+
         self.window = user_window
         self.window.title('Super Resolution Application Dark Mode')
         self.window.geometry('1764x968+71+7')
         self.window.resizable(False, False)
         self.choice = tk.IntVar()
+        self.choice2 = tk.IntVar()
+        self.choice3 = tk.IntVar()
+
         SuperResolutionGuiClass.uw = self
 
         # Add the functions here before the gui part starts.
@@ -164,11 +168,52 @@ class SuperResolutionGuiClass:
 
             # 11) Add the Save And Exit Button.
             self.btn_save_and_exit_config = tk.Button(self.settings_window)
-            self.btn_save_and_exit_config.place(relx=0.25, rely=0.62, height=34, width=283, bordermode='ignore')
+            self.btn_save_and_exit_config.place(relx=0.25, rely=0.85, height=34, width=283, bordermode='ignore')
             self.btn_save_and_exit_config.configure(compound='left')
             self.btn_save_and_exit_config.configure(font="-family {Verdana} -size 10 -weight bold")
             self.btn_save_and_exit_config.configure(background="white")  # d9d9d9
             self.btn_save_and_exit_config.configure(text='Save And Exit Config Settings:')
+
+            # Adding 2 option buttons to make the training choice how you want to train
+            # Either with l2 loss, or VGGLoss + adversarial_loss
+
+            self.style = ttk.Style()
+            self.style.map('TRadiobutton', background=[('selected', '#330066'), ('active', '#330066')])
+            self.style.configure('.', background='#330066')
+            self.style.configure('.', foreground='white')
+            self.style.configure('.', font="-family {Verdana} -size 10 -weight bold")
+
+            # Loss for vgg + adversarial_loss
+            self.radiobutton3 = ttk.Radiobutton(self.settings_window, text="Option 3",
+                                                variable=self.choice2,
+                                                value=0)
+            self.radiobutton3.place(relx=0.25, rely=0.62, relwidth=0.450, relheight=0.040, height=21)
+            self.radiobutton3.configure(compound='left')
+            self.radiobutton3.configure(text='Loss for vgg + adversarial_loss')
+
+            # L2 Loss option goes here:
+            self.radiobutton4 = ttk.Radiobutton(self.settings_window, text="Option 4",
+                                                variable=self.choice2,
+                                                value=1)
+            self.radiobutton4.place(relx=0.25, rely=0.67, relwidth=0.450, relheight=0.049, height=21)
+            self.radiobutton4.configure(compound='left')
+            self.radiobutton4.configure(text='L2 Loss')
+
+            # Add the choice to select if you want to load the model or make a new one.
+            self.radiobutton5 = ttk.Radiobutton(self.settings_window, text="Option 5",
+                                                variable=self.choice3,
+                                                value=0)
+            self.radiobutton5.place(relx=0.25, rely=0.72, relwidth=0.450, relheight=0.049, height=21)
+            self.radiobutton5.configure(compound='left')
+            self.radiobutton5.configure(text='Load model:')
+
+            self.radiobutton6 = ttk.Radiobutton(self.settings_window, text="Option 6",
+                                                variable=self.choice3,
+                                                value=1)
+            self.radiobutton6.place(relx=0.25, rely=0.77, relwidth=0.450, relheight=0.049, height=21)
+            self.radiobutton6.configure(compound='left')
+            self.radiobutton6.configure(text='Create model:')
+
 
             # Collect the settings the user entered.
             # sv = save variable
@@ -176,11 +221,13 @@ class SuperResolutionGuiClass:
             sv2 = self.batch_size_textbox_var
             sv3 = self.number_of_workers_textbox_var
             sv4 = self.set_high_res_textbox_var
+            sv5 = self.choice2
+            sv6 = self.choice3
 
             self.btn_save_and_exit_config.configure(
-                command=lambda: save_settings(self.settings_window, sv1, sv2, sv3, sv4))
+                command=lambda: save_settings(self.settings_window, sv1, sv2, sv3, sv4, sv5, sv6))
 
-        def save_settings(x, sv1, sv2, sv3, sv4):
+        def save_settings(x, sv1, sv2, sv3, sv4, sv5, sv6):
             self.settings_window = x
 
             # Do some validation and error handling.
@@ -191,6 +238,8 @@ class SuperResolutionGuiClass:
                 self.sv2_batch_size = int(sv2.get())
                 self.sv3_num_workers = int(sv3.get())
                 self.sv4_set_high_res = int(sv4.get())
+                self.sv5 = int(sv5.get())
+                self.sv6 = int(sv6.get())
 
             except ValueError:
                 tkinter.messagebox.showerror("Error:", "Most only have numbers:")
@@ -214,7 +263,8 @@ class SuperResolutionGuiClass:
             with open("settings.txt", mode="w") as file:
                 try:
                     file.write(
-                        f'{self.sv1_num_epoch},{self.sv2_batch_size},{self.sv3_num_workers},{self.sv4_set_high_res}')
+                        f'{self.sv1_num_epoch},{self.sv2_batch_size},{self.sv3_num_workers},{self.sv4_set_high_res},'
+                        f'{self.sv5},{self.sv6}')
 
                     # Extra protection is good :) even it´s a context manager.
                     file.close()
