@@ -1,10 +1,14 @@
+
 import torch
 import config
 from torch import nn
 from torch import optim
+import os
+import shutil
+
 
 # import gui_class
-
+import dataset
 from utils import load_checkpoint, save_checkpoint, plot_examples
 from loss import VGGLoss
 from torch.utils.data import DataLoader
@@ -42,6 +46,16 @@ def config_updater_function():
 
 
 # gui_class.SuperResolutionGuiClass.statusbar2['maximum'] = config.NUM_EPOCHS
+
+if os.path.isdir("saved/") is False:
+    path = os.path.join("", "saved/")
+    os.mkdir(path)
+
+if os.path.isdir("test_images/") is False:
+    folder = os.listdir("images/")
+    for f in folder:
+        shutil.copytree(f"images/{f}", "test_images")
+
 
 def train_fn(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss):
     loop = tqdm(loader, leave=True)

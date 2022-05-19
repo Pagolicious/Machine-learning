@@ -52,8 +52,8 @@ def load_checkpoint(checkpoint_file, model, optimizer, lr):
 
 def plot_examples(low_res_folder, gen):
     files = os.listdir(low_res_folder)
-
     gen.eval()
+
     for file in files:
         image = Image.open("test_images/" + file)
         with torch.no_grad():
