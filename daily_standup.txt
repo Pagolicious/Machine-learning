@@ -170,4 +170,12 @@ Charlie, is working: The model, and Flask.
 
 The group is planning the sprint of the week.
 
+Daily stand-up 2022-05-23
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+Lenny working, with GUI and training the model.
+Oscar working with Flask GUI.
+Alexander working with one pic resolution creation, drag an drop.
+Charlie, is working: Training the model, and cleaning up.
+Everyone is trying to see if there is something more we could need for the project, if there is something we missed or such
+
 
