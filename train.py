@@ -148,7 +148,7 @@ def main():
     print(f'Selected Highres: {the_high_res}')
     print(f'Selected Training: {the_training_choice}')
 
-    dataset = MyImageFolder(root_dir="images/")
+    dataset = MyImageFolder(root_dir=uw.user_path_to_training_picture_folder)  #root_dir="images/")
     loader = DataLoader(
         dataset,
         batch_size=the_batch_size,

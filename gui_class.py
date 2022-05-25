@@ -34,11 +34,11 @@ class SuperResolutionGuiClass:
         self.choice = tk.IntVar()
         self.choice2 = tk.IntVar()
         self.choice3 = tk.IntVar()
+        self.user_path_to_training_picture_folder = ''
 
         SuperResolutionGuiClass.uw = self
 
         # Add the functions here before the gui part starts.
-
 
         def training_the_model():
 
@@ -71,6 +71,15 @@ class SuperResolutionGuiClass:
             user_path_to_save_picture_folder = fd.askdirectory(parent=self.window, initialdir='/',
                                                                title='Please select where to save your pictures')
             self.textbox3.insert(0, user_path_to_save_picture_folder)
+
+        def select_training_directory():
+            self.textbox2.delete(0, 'end')
+            self.user_path_to_training_picture_folder = fd.askdirectory(parent=self.window, initialdir='/',
+                                                                        title='Please select where your training pictures '
+                                                                              'are:')
+
+            self.textbox2.insert(0, self.user_path_to_training_picture_folder)
+
 
         def config_settings_window():
             self.settings_window = tk.Toplevel(self.window)
@@ -213,7 +222,6 @@ class SuperResolutionGuiClass:
             self.radiobutton6.place(relx=0.25, rely=0.77, relwidth=0.450, relheight=0.049, height=21)
             self.radiobutton6.configure(compound='left')
             self.radiobutton6.configure(text='Create model:')
-
 
             # Collect the settings the user entered.
             # sv = save variable
@@ -451,11 +459,21 @@ class SuperResolutionGuiClass:
 
         # Placing the textbox2 that should contain the path to the pictures the model needs to train.
         self.textbox2 = tk.Entry(self.labelframe_train_model)
-        self.textbox2.place(relx=0.106, rely=0.271, height=20, relwidth=0.687, bordermode='ignore')
+        self.textbox2.place(relx=0.106, rely=0.220, height=20, relwidth=0.687, bordermode='ignore')
+
+        # place a file dialog button to select what folder your training pictures are.
+        self.btn_file_dialog_training_pictures = tk.Button(self.main_frame)
+        self.btn_file_dialog_training_pictures.place(relx=0.365, rely=0.280, height=34, relwidth=0.222,
+                                                     bordermode='ignore')
+        self.btn_file_dialog_training_pictures.configure(compound='left')
+        self.btn_file_dialog_training_pictures.configure(font="-family {Verdana} -size 10 -weight bold")
+        self.btn_file_dialog_training_pictures.configure(background="white")
+        self.btn_file_dialog_training_pictures.configure(text='Select your training folder:')
+        self.btn_file_dialog_training_pictures.configure(command=lambda: select_training_directory())
 
         # Placing the button that should start the training
         self.btn_train_model = tk.Button(self.main_frame)
-        self.btn_train_model.place(relx=0.365, rely=0.263, height=34, width=387)
+        self.btn_train_model.place(relx=0.365, rely=0.350, height=34, width=387)
         self.btn_train_model.configure(background="white")
         self.btn_train_model.configure(compound='left')
         self.btn_train_model.configure(font="-family {Verdana} -size 10 -weight bold")
@@ -465,7 +483,7 @@ class SuperResolutionGuiClass:
 
         # Placing the config button
         self.btn_train_config = tk.Button(self.main_frame)
-        self.btn_train_config.place(relx=0.365, rely=0.330, height=34, width=387)
+        self.btn_train_config.place(relx=0.365, rely=0.430, height=34, width=387)
         self.btn_train_config.configure(background="white")
         self.btn_train_config.configure(compound='left')
         self.btn_train_config.configure(font="-family {Verdana} -size 10 -weight bold")
