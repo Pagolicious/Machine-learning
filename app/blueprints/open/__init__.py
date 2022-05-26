@@ -15,12 +15,12 @@ class UploadFileForm(FlaskForm):
 
 @bp_open.route('/', methods=['GET', "POST"])
 @bp_open.route('/home', methods=['GET', "POST"])
-def home(path='C:/Teknikhögskolan/super_resolution/app/static/files'):
+def home(path='C:/Teknikhögskolan/super_resolution/app/static/files'):  # change this to your own path
     form = UploadFileForm()
     if form.validate_on_submit():
-        file = form.file.data # First grab the file
+        file = form.file.data  # First grab the file
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)), path, secure_filename(
-            'original_image.jpg'))) # Then save the file
+            'original_image.jpg')))  # Then save the file
     return render_template('index.html', form=form)
 
 
