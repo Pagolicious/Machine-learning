@@ -10,7 +10,9 @@ class MyImageFolder(Dataset):
         super(MyImageFolder, self).__init__()
         self.data = []
         self.root_dir = root_dir
-        self.class_names = os.listdir(root_dir)
+        self.my_temp_list = []
+        self.my_temp_list.append(root_dir)
+        self.class_names = self.my_temp_list
 
         for index, name in enumerate(self.class_names):
             files = os.listdir(os.path.join(root_dir, name))
@@ -28,7 +30,6 @@ class MyImageFolder(Dataset):
         high_res = config.highres_transform(image=image)["image"]
         low_res = config.lowres_transform(image=image)["image"]
         return low_res, high_res
-
 
 # def test():
 #     dataset = MyImageFolder(root_dir="images/")

@@ -5,6 +5,8 @@ import numpy as np
 from PIL import Image
 from torchvision.utils import save_image
 
+import train
+
 
 def gradient_penalty(critic, real, fake, device):
     BATCH_SIZE, C, H, W = real.shape
@@ -53,14 +55,14 @@ def load_checkpoint(checkpoint_file, model, optimizer, lr):
 def plot_examples(low_res_folder, gen):
     files = os.listdir(low_res_folder)
     gen.eval()
-
+    picture_path = train.check_pathways()
     for file in files:
-        image = Image.open("test_images/" + file)
+        image = Image.open(f"{picture_path}/test_images/" + file)
         with torch.no_grad():
             upscaled_img = gen(
                 config.test_transform(image=np.asarray(image))["image"]
                 .unsqueeze(0)
                 .to(config.DEVICE)
             )
-        save_image(upscaled_img * 0.5 + 0.5, f"saved/{file}")
+        save_image(upscaled_img * 0.5 + 0.5, f"{picture_path}/saved/{file}")
     gen.train()
