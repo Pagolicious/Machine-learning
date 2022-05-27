@@ -1,19 +1,25 @@
+import os
+
 import torch
 from PIL import Image
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+import sys
 
+
+source_path = (sys.path[0])
 LOAD_MODEL = False
 SAVE_MODEL = True
-CHECKPOINT_GEN = "gen.pth.tar"
-CHECKPOINT_DISC = "disc.pth.tar"
+CHECKPOINT_GEN = source_path + "/gen.pth.tar"
+CHECKPOINT_DISC = source_path + "/disc.pth.tar"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 LEARNING_RATE = 1e-4
 
 
 # The load settings file function goes here:
 def load_config_constant_values():
-    with open("settings.txt", mode="r") as file:
+    source_path = (sys.path[0])
+    with open(source_path + "/settings.txt", mode="r") as file:
         settings_item_listsettings_item_list = ""
         file_line = file.read()
         settings_item_list = file_line.split(",")

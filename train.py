@@ -1,3 +1,4 @@
+import sys
 
 import torch
 import config
@@ -5,7 +6,6 @@ from torch import nn
 from torch import optim
 import os
 import shutil
-
 
 # import gui_class
 import dataset
@@ -25,7 +25,8 @@ torch.backends.cudnn.benchmark = True
 
 
 def config_updater_function():
-    with open("settings.txt", mode="r") as file:
+    source_path = (sys.path[0])
+    with open(source_path + "/settings.txt", mode="r") as file:
         settings_item_listsettings_item_list = ""
         file_line = file.read()
         settings_item_list = file_line.split(",")
@@ -47,14 +48,60 @@ def config_updater_function():
 
 # gui_class.SuperResolutionGuiClass.statusbar2['maximum'] = config.NUM_EPOCHS
 
-if os.path.isdir("saved/") is False:
-    path = os.path.join("", "saved/")
-    os.mkdir(path)
+# if os.path.isdir("saved/") is False:
+#     from gui_class import SuperResolutionGuiClass
+#
+#     uw = SuperResolutionGuiClass.uw
+#
+#     copy_of_path = uw.user_path_to_training_picture_folder
+#     os.chdir(copy_of_path)
+#     os.chdir("..")
+#     path = os.path.join("", "saved/")
+#     os.mkdir(path)
 
-if os.path.isdir("test_images/") is False:
-    folder = os.listdir("images/")
-    for f in folder:
-        shutil.copytree(f"images/{f}", "test_images")
+
+def check_path():
+    from gui_class import SuperResolutionGuiClass
+    uw = SuperResolutionGuiClass.uw
+    global home_project_dir
+    home_project_dir = os.getcwd()
+
+    # copy_of_path = uw.user_path_to_training_picture_folder
+    # os.chdir(copy_of_path)
+    # os.chdir("..")
+    # global picture_path
+    # picture_path = os.getcwd()
+
+    picture_path = check_pathways()
+
+    if os.path.isdir(f"{os.curdir}/test_images/") is False:
+        # temp_list = []
+        # temp_list.append(uw.user_path_to_training_picture_folder)
+        # folder = temp_list # os.listdir(uw.user_path_to_training_picture_folder)
+        # temp = os.listdir(folder)
+        # for f in temp:
+        # os.chdir(f"../{uw.user_path_to_training_picture_folder}")
+        # shutil.copytree(f"{uw.user_path_to_training_picture_folder}",
+        #               os.chdir(f"../{uw.user_path_to_training_picture_folder} /test_images")
+
+        shutil.copytree(f"{uw.user_path_to_training_picture_folder}", f"{os.curdir}/test_images")
+
+    if os.path.isdir(f"{os.curdir}/saved/") is False:
+        path = os.path.join(os.curdir, "saved/")
+        os.mkdir(path)
+
+    os.chdir(home_project_dir)
+
+
+def check_pathways():
+    from gui_class import SuperResolutionGuiClass
+    uw = SuperResolutionGuiClass.uw
+    copy_of_path = uw.user_path_to_training_picture_folder
+    os.chdir(copy_of_path)
+    os.chdir("..")
+    global picture_path
+    picture_path = os.getcwd()
+    return picture_path
 
 
 def train_fn(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss):
@@ -126,12 +173,15 @@ def train_fn2(loader, disc, gen, opt_gen, opt_disc, mse, bce, vgg_loss):
         opt_gen.step()
 
         if idx % 200 == 0:
-            plot_examples("test_images/", gen)
+            from gui_class import SuperResolutionGuiClass
+            uw = SuperResolutionGuiClass.uw
+
+            plot_examples(picture_path + "/test_images/", gen)
 
 
 def main():
     # config.load_config_constant_values()
-    the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice,\
+    the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice, \
     the_model_choice = config_updater_function()
 
     from gui_class import SuperResolutionGuiClass
@@ -147,8 +197,8 @@ def main():
     print(f'Number of Workers selected: {the_num_workers}')
     print(f'Selected Highres: {the_high_res}')
     print(f'Selected Training: {the_training_choice}')
-
-    dataset = MyImageFolder(root_dir=uw.user_path_to_training_picture_folder)  #root_dir="images/")
+    check_path()
+    dataset = MyImageFolder(root_dir=uw.user_path_to_training_picture_folder)  # root_dir="images/")
     loader = DataLoader(
         dataset,
         batch_size=the_batch_size,
@@ -175,7 +225,7 @@ def main():
             config.CHECKPOINT_DISC, disc, opt_disc, config.LEARNING_RATE,
         )
 
-        # Making a local import to avoid circular import error.
+    # Making a local import to avoid circular import error.
     # from gui_class import SuperResolutionGuiClass
     # uw = SuperResolutionGuiClass.uw
 

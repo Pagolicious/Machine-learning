@@ -35,10 +35,11 @@ class SuperResolutionGuiClass:
         self.choice2 = tk.IntVar()
         self.choice3 = tk.IntVar()
         self.user_path_to_training_picture_folder = ''
-
+        self.config_pathway = ""
         SuperResolutionGuiClass.uw = self
 
         # Add the functions here before the gui part starts.
+        source_path = (sys.path[0])
 
         def training_the_model():
 
@@ -79,7 +80,6 @@ class SuperResolutionGuiClass:
                                                                               'are:')
 
             self.textbox2.insert(0, self.user_path_to_training_picture_folder)
-
 
         def config_settings_window():
             self.settings_window = tk.Toplevel(self.window)
@@ -268,7 +268,7 @@ class SuperResolutionGuiClass:
 
             # Save routine goes here:
 
-            with open("settings.txt", mode="w") as file:
+            with open(source_path + "/settings.txt", mode="w") as file:
                 try:
                     file.write(
                         f'{self.sv1_num_epoch},{self.sv2_batch_size},{self.sv3_num_workers},{self.sv4_set_high_res},'
