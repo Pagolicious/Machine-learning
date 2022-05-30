@@ -8,7 +8,7 @@ import sys
 
 
 source_path = (sys.path[0])
-LOAD_MODEL = False
+LOAD_MODEL = True
 SAVE_MODEL = True
 CHECKPOINT_GEN = source_path + "/gen.pth.tar"
 CHECKPOINT_DISC = source_path + "/disc.pth.tar"
@@ -18,7 +18,7 @@ LEARNING_RATE = 1e-4
 
 # The load settings file function goes here:
 def load_config_constant_values():
-    source_path = (sys.path[0])
+    source_path = (sys.path[1])  # If using flask, set path to (sys.path[1]). If GUI use (sys.path[0])
     with open(source_path + "/settings.txt", mode="r") as file:
         settings_item_listsettings_item_list = ""
         file_line = file.read()
