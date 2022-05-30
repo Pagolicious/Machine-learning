@@ -47,7 +47,12 @@ class SuperResolutionGuiClass:
             train.main()
 
         def create_super_resolution_photo():
-            print("Im the function that should take care of the Super Resolution Photo process. :)")
+
+            with open(source_path + "/settings.txt", mode="w") as file:
+                    file.write(
+                        f'{1},{1},{4},{96},'
+                        f'{0},{0}')
+            train.main()
 
         def selected_option():
             print(f'You selected option: {str(self.choice.get())}')
