@@ -1,0 +1,181 @@
+Daily stand-up 2022-04-12 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: tkinter could be used to create a GUI. Lenny showed us and prototype
+Alexander: SRGAN and U-net could be used for our model (Links in discord). Also found a dataset containing pictures for training and validation
+Oscar: Found animal pictures and tested downscaling for the pictures and made a program for downscaling.
+Charlie: Checked resizing for picture
+
+* Until next time
+- Research SRGAN and U-net
+- Work on GUI implementations
+- Look at downscaling
+
+Daily stand-up 2022-04-13
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+
+Group decided to use SRGAN model for the images.
+Group decided to fill up backlog, without any priority (yet)
+Group decided to use pycharm to create tools we need to downscale pictures to create dataset.
+Group decided to use Tkinter as Gui for now.
+
+Until next time:
+try to implement gui with downscale picture tool.
+try experiment with model.
+
+Sprint planning 2022-04-20 14:00
+Present during meeting: Alexander, Lenny, Oscar, Charlie and Britta
+
+Lenny: Work more on a prototype Gui
+Alexander: SRGAN model, read more about it and starting to test it
+Oscar: Research what works best to resize pictures to scale
+Britta: Research SRGAN model and look at what we already know about it
+Charlie: Research what works best to resize pictures to scale
+
+Daily stand-up 2022-04-21 09:00
+Present during meeting: Lenny, Oscar and Charlie
+Britta left the group so we are now 4 people in the group
+Lenny: Showed a prototype GUI that looks great
+Oscar & Charlie: Both have working programs for resizing
+
+Until next time:
+Continue working with GUI
+Continue improving resize program that will be ready to implement with the GUI
+
+Daily stand-up 2022-04-22 11:29
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: Merged GUI prototype
+Alexander: Working on the model for SRGAN
+Oscar: Made a tool to resize pictures
+Charlie: Made a tool to crop pictures for 96x96
+
+Until next time:
+Oscar & Charlie: will compare their tools and create a tool based on that
+Lenny: Read about the model
+Alexander: Continue work on model
+
+Daily stand-up 2022-04-25 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Charlie och Oscar continues with implementing the tools and learning tkinter more.
+Alexander, keeps working with the model, should soon be ready.
+Lenny make som improvment of the Gui to darkmode.
+
+Until next time:
+Planning the sprint, make a loss function.
+train the model if there is time.
+
+Daily stand-up 2022-04-26 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Charlie shows, how he implemented the creating the dataset with the Gui.
+Alexander shows us the model, that is taking place.
+
+
+Until next time:
+Oscar & Charlie: applying new feauters, to create dataset.
+Lenny: adding more stuff to the gui.
+Alexander: Continue work on model.
+
+Daily stand-up 2022-04-27 09:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Charlie and Oscar implemented both resize functions
+Lenny added more features, options for resize function and folder chooser
+Alexander have been starting to testing the model
+
+Until next time:
+Oscar & Charlie: fixing bugs and looking into possible adding more stuff that can be useful.
+Lenny: adding more stuff to the gui.
+Alexander: Continue work on model.
+
+Daily stand-up 2022-04-28 09:00
+Present during meeting: Alexander, Oscar and Charlie
+Alexander: Finished model for SRGAN
+Oscar & Charlie: worked with GUI
+Lenny: Sick
+
+Until next time:
+Alexander: VGG loss implementation with Oscar
+Oscar: Look at model and loss function
+Charlie: continue work on GUI
+
+Daily stand-up 2022-04-29 13:00
+Present during meeting: Alexander, Oscar and Charlie
+Alexander & Oscar: Researched different parts of the SRGAN model 
+Charlie: worked with GUI
+Lenny: Sick
+
+Until next time:
+Alexander & Oscar: Try to see if we can test the whole SRGAN process
+Charlie: continue work on GUI, sort in different files
+
+Daily stand-up 2022-05-02 11:00
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Alexander & Oscar:  Finished the goals for today, you can now start training the model
+Charlie: Implemented the option to choose size for the dataset images in GUI
+
+Until next time:
+Charlie, Alexander and Oscar: Training discriminator and generator model and learn more about it
+Lenny: Implementing GUI config window
+
+Daily stand-up 2022-05-03 09:02
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: Added settings window to GUI
+Alexander: Had success training with L2loss however had issues when changing to VGG + adversarial loss
+Charlie: Had issues with training the model
+Oscar: Trained with VGG + adversarial loss
+
+Until next time:
+Lenny: Add so that u can change from settings
+Alexander: Check why we had issues with VGG + adversarial loss
+Oscar: Continue training
+Charlie: Continue training
+
+Daily stand-up 2022-05-04 13:30
+Present during meeting: Alexander, Lenny, Oscar and Charlie
+Lenny: Can now change config from gui
+Alexander: Had success training with L2loss and VGG + adversarial loss
+Charlie: Tried different settings and made good progress
+Oscar: Trained with mostly l2 loss
+
+Until next time:
+Lenny: Looking into colaboratory and training
+Alexander: More testing and also looking into colaboratory
+Oscar: Continue training, look for tips from people that has used simliar programs before
+Charlie: Continue training
+
+Daily stand-up 2022-05-12
+Alexander, Lenny, Oscar and Charlie are present during meeting:
+Everybody been working with modell and colab.
+
+Until next time:
+Oscar checking flask, and the compability with SRGAN
+Alexander, checking drag and drop with tkinter, so we maybe can incoporate it later into the GUI.
+Charlie: Working with the model, and trying to fix colab settings, not working as it should.
+Lenny: trying to improve the colors in the model. Have an idea of maybe how to solve the color issue.
+
+Daily stand-up 2022-05-13
+Lenny, Oscar is present at meeting.
+Oscar was checking flask, for possibilities to build an nice GUI.
+Lenny was trying to fix color problems, not succesfull.
+
+Until next time:
+Oscar working with flask.
+Lenny is working to see if its possible to train from GUI, and are looking at hardcoded paths in the training file.
+
+
+Daily stand-up 2022-05-16
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+Lenny working, with GUI and the training feature.
+Oscar working with Flask GUI.
+Alexander working with one pic resolution creation.
+Charlie, is working: The model, and Flask. 
+
+The group is planning the sprint of the week.
+
+Daily stand-up 2022-05-23
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+Lenny working, with GUI and training the model.
+Oscar working with Flask GUI.
+Alexander working with one pic resolution creation, drag an drop.
+Charlie, is working: Training the model, and cleaning up.
+Everyone is trying to see if there is something more we could need for the project, if there is something we missed or such
+
+
