@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import config
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 from PIL import Image
 
 
@@ -31,14 +31,4 @@ class MyImageFolder(Dataset):
         low_res = config.lowres_transform(image=image)["image"]
         return low_res, high_res
 
-# def test():
-#     dataset = MyImageFolder(root_dir="images/")
-#     loader = DataLoader(dataset, batch_size=1, num_workers=8)
-#
-#     for low_res, high_res in loader:
-#         print(low_res.shape)
-#         print(high_res.shape)
-#
-#
-# if __name__ == "__main__":
-#     test()
+

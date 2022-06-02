@@ -1,17 +1,16 @@
 import torch
 from torch import nn
-import numpy
 
 
 class ConvalutionalBlock(nn.Module):
     def __init__(
-        self,
-        in_channels,
-        out_channels,
-        discriminator=False,
-        use_act=True,
-        use_bn=True,
-        **kwargs,
+            self,
+            in_channels,
+            out_channels,
+            discriminator=False,
+            use_act=True,
+            use_bn=True,
+            **kwargs,
     ):
         super().__init__()
         self.use_act = use_act
@@ -68,7 +67,8 @@ class Generator(nn.Module):
         super().__init__()
         self.initial = ConvalutionalBlock(in_channels, num_channels, kernel_size=9, stride=1, padding=4, use_bn=False)
         self.residuals = nn.Sequential(*[ResidualBlock(num_channels) for _ in range(num_blocks)])
-        self.ConvalutionalBlock = ConvalutionalBlock(num_channels, num_channels, kernel_size=3, stride=1, padding=1, use_act=False)
+        self.ConvalutionalBlock = ConvalutionalBlock(num_channels, num_channels, kernel_size=3, stride=1, padding=1,
+                                                     use_act=False)
         self.upsamples = nn.Sequential(UpsampleBlock(num_channels, 2), UpsampleBlock(num_channels, 2))
         self.final = nn.Conv2d(num_channels, in_channels, kernel_size=9, stride=1, padding=4)
 
@@ -103,7 +103,7 @@ class Discriminator(nn.Module):
         self.classifier = nn.Sequential(
             nn.AdaptiveAvgPool2d((6, 6)),
             nn.Flatten(),
-            nn.Linear(512*6*6, 1024),
+            nn.Linear(512 * 6 * 6, 1024),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(1024, 1),
         )
@@ -112,18 +112,3 @@ class Discriminator(nn.Module):
         x = self.blocks(x)
         return self.classifier(x)
 
-# def test():
-#    low_resolution = 24  # 96x96 -> 24x24
-#    with torch.cuda.amp.autocast():
-#        x = torch.randn((5, 3, low_resolution, low_resolution))
-#        gen = Generator()
-#        gen_out = gen(x)
-#        disc = Discriminator()
-#        disc_out = disc(gen_out)
-#
-#        print(gen_out.shape)
-#        print(disc_out.shape)
-#
-#
-# if __name__ == "__main__":
-#    test()

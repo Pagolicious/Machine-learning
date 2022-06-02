@@ -1,11 +1,8 @@
-import os
-
 import torch
 from PIL import Image
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import sys
-
 
 source_path = (sys.path[0])
 LOAD_MODEL = True
@@ -39,17 +36,9 @@ def load_config_constant_values():
     return the_num_epochs, the_batch_size, the_num_workers, the_high_res, the_training_choice, the_model_choice
 
 
-# NUM_EPOCHS = 100
-# BATCH_SIZE = 16
-# NUM_WORKERS = 4
-# HIGH_RES = 96
-
-# Getting problem then trying to reload the values, because they are constants
-# so have to change them to non constants.
-# NUM_EPOCHS, BATCH_SIZE, NUM_WORKERS, HIGH_RES, TRAINING_CHOICE = load_config_constant_values()
 num_epochs, batch_size, num_workers, high_res, training_choice, the_model_choice = load_config_constant_values()
 
-# LOW_RES = HIGH_RES // 4
+
 LOW_RES = high_res // 4
 IMG_CHANNELS = 3
 
