@@ -1,16 +1,14 @@
 import sys
-import os
-import time
+
 import tkinter as tk
 import tkinter.filedialog
 import tkinter.ttk as ttk
-from tkinter.constants import *
-from tkinter import filedialog as fd, filedialog
+
+from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
-from PIL import ImageTk, Image
-import config
+
 import train
-from resize import resize_decrease
+
 import resize
 
 """
@@ -38,20 +36,18 @@ class SuperResolutionGuiClass:
         self.config_pathway = ""
         SuperResolutionGuiClass.uw = self
 
-        # Add the functions here before the gui part starts.
         source_path = (sys.path[0])
 
         def training_the_model():
 
-            # Call the training function, from the train.py file.
             train.main()
 
         def create_super_resolution_photo():
 
             with open(source_path + "/settings.txt", mode="w") as file:
-                    file.write(
-                        f'{1},{1},{4},{96},'
-                        f'{0},{0}')
+                file.write(
+                    f'{1},{1},{2},{96},'
+                    f'{0},{0}')
             train.main()
 
         def selected_option():
@@ -259,8 +255,6 @@ class SuperResolutionGuiClass:
 
             # Do a check so the boxes is not contains the value 0
             # if there is 0 il reset it to the standard paper value.
-            # unsure about the workers tho , maybe you want train with 0 workers in som rare occasions ?
-            # But if that´s the case we just erase the num worker check in a later issue card.
 
             if self.sv1_num_epoch == 0:
                 self.sv1_num_epoch = 100
@@ -279,7 +273,6 @@ class SuperResolutionGuiClass:
                         f'{self.sv1_num_epoch},{self.sv2_batch_size},{self.sv3_num_workers},{self.sv4_set_high_res},'
                         f'{self.sv5},{self.sv6}')
 
-                    # Extra protection is good :) even it´s a context manager.
                     file.close()
 
                 except IOError:
@@ -287,7 +280,6 @@ class SuperResolutionGuiClass:
 
             tkinter.messagebox.showinfo("Information:", "Saved the settings.")
 
-            # this should come last, because this removes the window.
             self.settings_window.destroy()
 
         """ 
@@ -421,7 +413,6 @@ class SuperResolutionGuiClass:
         self.textbox5 = tk.Entry(self.label_frame_create_own_dataset, textvariable=self.textbox5_var)
         self.textbox5.place(relx=0.720, rely=0.500, height=20, relwidth=0.100, bordermode='ignore')
 
-        # Next textbox called textbox3 I made an error then I was thinking what was needed on the gui...
         # and placing the label to the textbox3, save path
         self.label_save_path = tk.Label(self.main_frame)
         self.label_save_path.place(relx=0.008, rely=0.310, height=22, width=200)

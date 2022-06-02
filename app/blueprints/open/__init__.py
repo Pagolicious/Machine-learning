@@ -25,13 +25,8 @@ def home():
         file = form.file.data  # First grab the file
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                f'{path}/app/static/files/images',
-                               secure_filename('image.jpg')))  # Then save the file
-        # file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),
-        #                        'C:/Users/Oscar/Desktop/PyCharm/super_resolution/app/static/files/images',
-        #                        secure_filename('image.jpg')))  # Then save the file
-        # file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),
-        #                        'C:/Users/Oscar/Desktop/PyCharm/super_resolution/app/static/test_images',
-        #                        secure_filename('image.jpg')))  # Then save the file
+                               secure_filename('image.jpg')))
+
         original = rf'{path}/app/static/files/images/image.jpg'
         target = rf'{path}/app/static/test_images/image.jpg'
 

@@ -4,9 +4,7 @@ from PIL import Image
 import os
 
 
-
 def with_crop():
-
     from gui_class import SuperResolutionGuiClass
     uw = SuperResolutionGuiClass.uw
 
@@ -65,7 +63,6 @@ def with_crop():
 
 
 def without_crop():
-
     from gui_class import SuperResolutionGuiClass
     uw = SuperResolutionGuiClass.uw
 
@@ -74,7 +71,7 @@ def without_crop():
         out_folder = uw.textbox3.get()
         height_option = uw.textbox4_var.get()
         width_option = uw.textbox5_var.get()
-        # resize_decrease(in_folder, out_folder)
+
         uw.statusbar1['maximum'] = len(os.listdir(in_folder))
 
         for images in os.listdir(in_folder):
