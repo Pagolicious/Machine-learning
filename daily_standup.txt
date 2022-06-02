@@ -166,7 +166,12 @@ Lenny, Oscar, Charlie, Alexander is present at meeting.
 Lenny working, with GUI and the training feature.
 Oscar working with Flask GUI.
 Alexander working with one pic resolution creation.
-Charlie, is working: The model, and Flask. 
+Charlie, is working: The model, and Flask.
+
+Daily stand-up 2022-05-17 - 2022-05-20
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+The group is training the hole sprint.
+
 
 The group is planning the sprint of the week.
 
@@ -178,4 +183,13 @@ Alexander working with one pic resolution creation, drag an drop.
 Charlie, is working: Training the model, and cleaning up.
 Everyone is trying to see if there is something more we could need for the project, if there is something we missed or such
 
+Daily stand-up 2022-05-24 - 2022-05-27
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+Lenny working, with GUI and training the model.
+Oscar working with Flask GUI.
+Alexander working with one pic resolution creation, and training the model.
+Charlie, is working: Training the model, and cleaning up. And working with folders.
 
+Daily stand-up 2022-05-30 
+Lenny, Oscar, Charlie, Alexander is present at meeting.
+The group was planning for the presentation, and fixing the details.
